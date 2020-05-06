@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/sqlEngine/Parser/Parser.cpp
+Parser.h
+C:/sqlEngine/Parser/Parser.h
+
+C:/sqlEngine/Parser/Parser.h
+iostream
+-
+vector
+-
+
+C:/sqlEngine/main.cpp
+iostream
+-
+Parser/Parser.h
+C:/sqlEngine/Parser/Parser.h
+

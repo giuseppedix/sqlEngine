@@ -1,0 +1,3 @@
+C:/sqlEngine/cmake-build-debug/CMakeFiles/sqlEngine.dir
+C:/sqlEngine/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/sqlEngine/cmake-build-debug/CMakeFiles/rebuild_cache.dir
