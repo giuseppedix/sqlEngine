@@ -45,10 +45,10 @@ RM = "C:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\sqlEngine
+CMAKE_SOURCE_DIR = D:\SqlEngine\sqlEngine
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\sqlEngine\cmake-build-debug
+CMAKE_BINARY_DIR = D:\SqlEngine\sqlEngine\cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -75,14 +75,14 @@ clean: CMakeFiles\sqlEngine.dir\clean
 CMakeFiles\sqlEngine.dir\all:
 	$(MAKE) -f CMakeFiles\sqlEngine.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\sqlEngine.dir\depend
 	$(MAKE) -f CMakeFiles\sqlEngine.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\sqlEngine.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\sqlEngine\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target sqlEngine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\SqlEngine\sqlEngine\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target sqlEngine"
 .PHONY : CMakeFiles\sqlEngine.dir\all
 
 # Build rule for subdir invocation for target.
 CMakeFiles\sqlEngine.dir\rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\sqlEngine\cmake-build-debug\CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\SqlEngine\sqlEngine\cmake-build-debug\CMakeFiles 7
 	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\sqlEngine.dir\all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\sqlEngine\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\SqlEngine\sqlEngine\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles\sqlEngine.dir\rule
 
 # Convenience name for target.

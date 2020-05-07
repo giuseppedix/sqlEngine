@@ -8,18 +8,18 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/sqlEngine/cmake-build-debug"/>
+				<Option working_dir="D:/SqlEngine/sqlEngine/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 all"/>
-					<CompileFile command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="sqlEngine">
-				<Option output="C:/sqlEngine/cmake-build-debug/sqlEngine.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/sqlEngine/cmake-build-debug"/>
+				<Option output="D:/SqlEngine/sqlEngine/cmake-build-debug/sqlEngine.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/SqlEngine/sqlEngine/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="msvc8"/>
@@ -34,15 +34,15 @@
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 sqlEngine"/>
-					<CompileFile command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 sqlEngine"/>
+					<CompileFile command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="sqlEngine/fast">
-				<Option output="C:/sqlEngine/cmake-build-debug/sqlEngine.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/sqlEngine/cmake-build-debug"/>
+				<Option output="D:/SqlEngine/sqlEngine/cmake-build-debug/sqlEngine.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/SqlEngine/sqlEngine/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="msvc8"/>
@@ -57,70 +57,70 @@
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 sqlEngine/fast"/>
-					<CompileFile command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 sqlEngine/fast"/>
+					<CompileFile command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="C:/sqlEngine/cmake-build-debug"/>
+				<Option working_dir="D:/SqlEngine/sqlEngine/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 edit_cache"/>
-					<CompileFile command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/sqlEngine/cmake-build-debug"/>
+				<Option working_dir="D:/SqlEngine/sqlEngine/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\SqlEngine\sqlEngine\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/sqlEngine/Parser/Parser.cpp">
+		<Unit filename="D:/SqlEngine/sqlEngine/Parser/Parser.cpp">
 			<Option target="sqlEngine"/>
 		</Unit>
-		<Unit filename="C:/sqlEngine/Parser/Parser.h">
+		<Unit filename="D:/SqlEngine/sqlEngine/Parser/Parser.h">
 			<Option target="sqlEngine"/>
 		</Unit>
-		<Unit filename="C:/sqlEngine/Table/Column.cpp">
+		<Unit filename="D:/SqlEngine/sqlEngine/Table/Column.cpp">
 			<Option target="sqlEngine"/>
 		</Unit>
-		<Unit filename="C:/sqlEngine/Table/Column.h">
+		<Unit filename="D:/SqlEngine/sqlEngine/Table/Column.h">
 			<Option target="sqlEngine"/>
 		</Unit>
-		<Unit filename="C:/sqlEngine/Table/Row.cpp">
+		<Unit filename="D:/SqlEngine/sqlEngine/Table/Row.cpp">
 			<Option target="sqlEngine"/>
 		</Unit>
-		<Unit filename="C:/sqlEngine/Table/Row.h">
+		<Unit filename="D:/SqlEngine/sqlEngine/Table/Row.h">
 			<Option target="sqlEngine"/>
 		</Unit>
-		<Unit filename="C:/sqlEngine/Table/RowElement.cpp">
+		<Unit filename="D:/SqlEngine/sqlEngine/Table/RowElement.cpp">
 			<Option target="sqlEngine"/>
 		</Unit>
-		<Unit filename="C:/sqlEngine/Table/RowElement.h">
+		<Unit filename="D:/SqlEngine/sqlEngine/Table/RowElement.h">
 			<Option target="sqlEngine"/>
 		</Unit>
-		<Unit filename="C:/sqlEngine/Table/Table.cpp">
+		<Unit filename="D:/SqlEngine/sqlEngine/Table/Table.cpp">
 			<Option target="sqlEngine"/>
 		</Unit>
-		<Unit filename="C:/sqlEngine/Table/Table.h">
+		<Unit filename="D:/SqlEngine/sqlEngine/Table/Table.h">
 			<Option target="sqlEngine"/>
 		</Unit>
-		<Unit filename="C:/sqlEngine/main.cpp">
+		<Unit filename="D:/SqlEngine/sqlEngine/main.cpp">
 			<Option target="sqlEngine"/>
 		</Unit>
-		<Unit filename="C:/sqlEngine/types.h">
+		<Unit filename="D:/SqlEngine/sqlEngine/types.h">
 			<Option target="sqlEngine"/>
 		</Unit>
-		<Unit filename="C:/sqlEngine/CMakeLists.txt">
+		<Unit filename="D:/SqlEngine/sqlEngine/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

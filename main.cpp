@@ -3,8 +3,9 @@
 
 
 int main() {
-    Parser parser;
-    parser.parserStr("Giuseppe");
     std::cout << "Hello, World!" << std::endl;
+    Parser parser;
+    parser.parserStr("Ciao");
+
     return 0;
 }
