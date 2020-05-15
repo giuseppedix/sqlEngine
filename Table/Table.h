@@ -1,6 +1,4 @@
-//
-// Created by gdisi on 06/05/2020.
-//
+
 
 #ifndef SQLENGINE_TABLE_H
 #define SQLENGINE_TABLE_H
@@ -12,6 +10,8 @@
 using namespace std;
 
 class Table {
+public:
+    Table() = default;
     string tableName;
     vector<Row> rows;
     vector<Column> cols;
