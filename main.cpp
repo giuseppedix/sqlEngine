@@ -1,20 +1,18 @@
 #include <iostream>
-#include "Parser/Parser.h"
+#include "SqlEngine/SqlEngine.h"
 
 using namespace std;
 
 int main() {
-
-    Parser parser;
+    string dbName = "SqlDb";
+    SqlEngine sqlEngine;
+    sqlEngine.loadState(dbName);
 
     string command_input;
     bool quit = false;
-
-
     do{
         string command;
-        cout << "MyDB> ";
-
+        cout << sqlEngine.getState().getDbName() << ">> ";
         do{
             getline(cin, command_input);
             command+=command_input;
@@ -25,15 +23,10 @@ int main() {
             quit = true;
         }
         else{
-            parser.execute(command);
+            sqlEngine.execute(command);
         }
-
+        cout << endl;
     }
-
     while (!quit);
-
-
-
-
     return 0;
 }

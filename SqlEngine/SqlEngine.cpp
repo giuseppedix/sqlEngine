@@ -1,6 +1,6 @@
-#include "Parser.h"
+#include "SqlEngine.h"
 
-int Parser::execute(const string &command) {
+int SqlEngine::execute(const string &command) {
     string command_down;
     int ret = 0;
 
@@ -54,7 +54,7 @@ int Parser::execute(const string &command) {
     return ret;
 }
 
-Command Parser::getCommand(string command) {
+Command SqlEngine::getCommand(string command) {
 
     string out_str;
     Command command_enum;
@@ -91,7 +91,7 @@ Command Parser::getCommand(string command) {
 
 }
 
-string Parser::getParamsInBrakets(string command) {
+string SqlEngine::getParamsInBrakets(string command) {
     int id, age;
     float salary;
     string name, address;
@@ -100,7 +100,18 @@ string Parser::getParamsInBrakets(string command) {
     return std::string();
 }
 
-string Parser::removeSpace(string input) {
+State SqlEngine::getState() const {
+    return state;
+}
+
+int SqlEngine::loadState(const string &dbName) {
+    state.setDbName(dbName);
+    int result = 0;
+    //TODO
+    return result;
+}
+
+string SqlEngine::removeSpace(string input) {
 
     input.erase(std::remove(input.begin(), input.end(), ' '), input.end());
     return input;

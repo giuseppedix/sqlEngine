@@ -1,13 +1,14 @@
 
 
-#ifndef SQLENGINE_PARSER_H
-#define SQLENGINE_PARSER_H
+#ifndef SQLENGINE_SQLENGINE_H
+#define SQLENGINE_SQLENGINE_H
 
 #include <iostream>
 #include <vector>
 #include <sstream>
 #include <algorithm>
 #include "../Table/Table.h"
+#include "State.h"
 
 using namespace std;
 
@@ -23,23 +24,22 @@ using namespace std;
 
 enum Command {CREATE_TABLE, DROP_TABLE, INSERT_INTO, DELETE_FROM, TRUNCATE_TABLE, UPDATE, SELECT, ORDER_BY, NOT_VALID};
 
-class Parser{
+class SqlEngine{
 public:
 
-    Parser() = default;
+    //METHODS
+    SqlEngine() = default;
     int execute(const string &command);
-
-
-
+    int loadState(const string &dirPath);
+    State getState() const;
 private:
-
     // METHODS
     string removeSpace(string input);
     string getParamsInBrakets(string command);
     Command getCommand(string command_input);
     vector<string> getValuesType();
     //ATTRIBUTES
-    vector <Table> tables;
+    State state;
 
 
 };
