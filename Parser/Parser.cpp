@@ -1,8 +1,16 @@
 #include "Parser.h"
+#include <algorithm>
+#include <vector>
+
+#define INT_ "int"
+#define TEXT_ "text"
+#define FLOAT_ "float"
 
 int Parser::execute(const string &command) {
     string command_down;
     int ret = 0;
+    int pos = 0;
+    vector<string> sql_vector;
 
     try {
         command_down.assign(command);
@@ -10,7 +18,8 @@ int Parser::execute(const string &command) {
         switch (getCommand((command_down))) {
             case CREATE_TABLE:
                 //TODO -> executeCreateTable
-                cout << "Create Table:";
+                cout << "Create Table" << endl;
+                getParamsInBrakets(command_down);
                 break;
             case DROP_TABLE:
                 //TODO -> executeDropTable
@@ -42,14 +51,12 @@ int Parser::execute(const string &command) {
                 break;
 
             default:
-                cout << "Non hai selezionato nessun comando a dispozione" << endl;
                 throw invalid_argument("ERROR: command not valid");
         }
     }
-    catch (invalid_argument &exc) {
-        cerr << exc.what() << endl;
+    catch (invalid_argument &exc1) {
+        cerr << exc1.what() << endl;
     }
-
 
     return ret;
 }
@@ -91,13 +98,83 @@ Command Parser::getCommand(string command) {
 
 }
 
-string Parser::getParamsInBrakets(string command) {
-    int id, age;
-    float salary;
-    string name, address;
+int Parser::getParamsInBrakets(string command_down) {
+
+    transform(command_down.begin(), command_down.end(), command_down.begin(), ::tolower);
+
+    string start = "(";
+    string end = ")";
+    string delim = ",";
+    size_t p = 0;
+    int cont;
+
+    command_down.erase(0, command_down.find(start) + 1);
+    command_down.erase(command_down.find(')'), command_down.find(';'));
+    command_down += ',';
+    vector<string> params;
+    cont = 0;
+    while ((p = command_down.find(delim)) != string::npos) {
+        params.push_back(command_down.substr(0, p));
+        cont++;
+        string value;
+        value = params.at(cont - 1).back();
+        //getValuesType(params, cont);
+        command_down.erase(0, p + delim.length());
+    }
 
 
-    return std::string();
+    return 0;
+}
+
+
+Type Parser::getValuesType(vector<string> params, int cont) {
+
+    Type type_enum;
+
+
+
+    try {
+
+        if (type_enum != INT)
+            throw runtime_error("ERROR: Parameter is not an int");
+    }
+    catch (runtime_error &exc) {
+        cerr << exc.what() << endl;
+
+    }
+
+
+    try {
+
+        if (type_enum != FLOAT)
+            throw runtime_error("ERROR: Parameter is not a float");
+    }
+    catch (runtime_error &exc) {
+        cerr << exc.what() << endl;
+
+    }
+
+    try {
+
+        if (type_enum != TEXT)
+            throw runtime_error("ERROR: Parameter is not a text");
+    }
+    catch (runtime_error &exc) {
+        cerr << exc.what() << endl;
+
+    }
+
+
+
+    return type_enum;
+
+
+
+
+
+
+
+
 }
 
 string Parser::removeSpace(string input) {
@@ -106,6 +183,13 @@ string Parser::removeSpace(string input) {
     return input;
 
 }
+
+
+
+
+
+
+
 
 
 

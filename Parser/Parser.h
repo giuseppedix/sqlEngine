@@ -1,5 +1,3 @@
-
-
 #ifndef SQLENGINE_PARSER_H
 #define SQLENGINE_PARSER_H
 
@@ -16,12 +14,19 @@ using namespace std;
 #define INSERT_INTO_D "insertinto"
 #define DELETE_FROM_D "deletefrom"
 #define TRUNCATE_TABLE_D "truncatetable"
-#define UPDATE_D "createtable"
+#define UPDATE_D "update"
 #define SELECT_D "select"
 #define ORDER_BY_D "orderby"
 
 
 enum Command {CREATE_TABLE, DROP_TABLE, INSERT_INTO, DELETE_FROM, TRUNCATE_TABLE, UPDATE, SELECT, ORDER_BY, NOT_VALID};
+
+
+
+
+
+
+
 
 class Parser{
 public:
@@ -35,11 +40,15 @@ private:
 
     // METHODS
     string removeSpace(string input);
-    string getParamsInBrakets(string command);
+    int getParamsInBrakets(string command_down);
     Command getCommand(string command_input);
-    vector<string> getValuesType();
+    Type getValuesType(vector<string> params, int cont);
+
+
+
     //ATTRIBUTES
     vector <Table> tables;
+
 
 
 };
