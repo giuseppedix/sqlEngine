@@ -11,9 +11,19 @@
 using namespace std;
 
 class Column {
+
+public:
+    int getMask() const;
+
+    const string &getName() const;
+
+    void setName(const string &name);
+
+    void setMask(int mask);
+
+private:
     string name;
-    Type type;
-    bool isNotNull;
+    int mask;
 };
 
 

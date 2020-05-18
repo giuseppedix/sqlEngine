@@ -16,6 +16,8 @@ public:
     string getDbName();
     void setDbName(const string &dnName);
 
+    void addTable(string basicString, vector<int> paramsMask, vector<string> paramsNames);
+
 private:
     string dbName;
     vector <Table> tables;

@@ -1,5 +1,6 @@
 #include "SqlEngine.h"
 
+
 int SqlEngine::execute(const string &command) {
     string command_down;
     int ret = 0;
@@ -133,15 +134,21 @@ void SqlEngine::executeCreateTable(string command) {
         cout << "Create Table: " << nameTable << endl;
         cout << "Parameters: ";
         vector<string> params = getParams(out_str);
+        vector<int> paramsMasks;
+        vector<string> paramsNames;
         for(int i = 0; i < params.size(); i++){
             cout << params[i] << ", ";
             //TODO getParamInfo
-            string paramType = "";
+            int paramMask = MASK_INVALID;
             string paramName = "";
 
-            getParamInfo(params[i], paramType, paramName);
+            getParamInfo(params[i], paramMask, paramName);
+            paramsMasks.push_back(paramMask);
+            paramsNames.push_back(paramName);
         }
         cout << endl;
+        state.addTable(nameTable, paramsMasks, paramsNames);
+
     }
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;
@@ -187,7 +194,48 @@ vector<string> SqlEngine::splitValueByDelimiter(string s, string delimiter) {
     return ret;
 }
 
-void SqlEngine::getParamInfo(const string &basicString, string &basicString1, string &basicString2) {
+void SqlEngine::getParamInfo(const string &s, int &paramMask, string &name) {
+
+    int i = 0;
+
+    if(s.find("int") != string::npos){
+        i = s.find("int");
+        paramMask |= MASK_INT;
+    }
+    else if(s.find("float") != string::npos){
+        i = s.find("float");
+        paramMask |= MASK_FLOAT;
+    }
+    else if(s.find("text") != string::npos){
+        i = s.find("text");
+        paramMask |= MASK_TEXT;
+    }
+    else if(s.find("date") != string::npos){
+        i = s.find("date");
+        paramMask |= MASK_DATE;
+    }
+    else if(s.find("time") != string::npos){
+        i = s.find("time");
+        paramMask |= MASK_TIME;
+    }
+    else if(s.find("char") != string::npos){
+        i = s.find("char");
+        paramMask |= MASK_CHAR;
+    }
+    string str;
+    str.assign(s);
+    str.erase(i, str.length() - i);
+    name = str;
+    cout << name << endl;
+    if(s.find("notnull") != string::npos){
+        paramMask |= MASK_NOTNULL;
+    }
+    if(s.find("autoincrement") != string::npos){
+        paramMask |= MASK_AUTOINCREMENT;
+    }
+
+    bitset<8> x(paramMask);
+    cout << x << endl;
 
 }
 

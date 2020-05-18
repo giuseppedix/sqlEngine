@@ -6,61 +6,47 @@
 
 #IncludeRegexTransform: 
 
-D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.cpp
-SqlEngine.h
-D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
-
-D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
-iostream
--
-vector
--
-sstream
--
-algorithm
--
-../Table/Table.h
-D:/SqlEngine/sqlEngine/Table/Table.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.cpp
 State.h
-D:/SqlEngine/sqlEngine/SqlEngine/State.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
 
-D:/SqlEngine/sqlEngine/SqlEngine/State.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
 ../Table/Table.h
-D:/SqlEngine/sqlEngine/Table/Table.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
 
-D:/SqlEngine/sqlEngine/Table/Column.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.h
 vector
 -
 iostream
 -
 ../types.h
-D:/SqlEngine/sqlEngine/types.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
 
-D:/SqlEngine/sqlEngine/Table/Row.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Row.h
 iostream
 -
 vector
 -
 RowElement.h
-D:/SqlEngine/sqlEngine/Table/RowElement.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
 
-D:/SqlEngine/sqlEngine/Table/RowElement.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
 iostream
 -
 vector
 -
 ../types.h
-D:/SqlEngine/sqlEngine/types.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
 
-D:/SqlEngine/sqlEngine/Table/Table.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
 vector
 -
 iostream
 -
 Row.h
-D:/SqlEngine/sqlEngine/Table/Row.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Row.h
 Column.h
-D:/SqlEngine/sqlEngine/Table/Column.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.h
 
-D:/SqlEngine/sqlEngine/types.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
 
