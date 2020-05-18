@@ -10,7 +10,7 @@ int SqlEngine::execute(const string &command) {
         switch (getCommand((command_down))) {
             case CREATE_TABLE:
                 //TODO -> executeCreateTable
-                cout << "Create Table:";
+                executeCreateTable(command_down);
                 break;
             case DROP_TABLE:
                 //TODO -> executeDropTable
@@ -49,8 +49,6 @@ int SqlEngine::execute(const string &command) {
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;
     }
-
-
     return ret;
 }
 
@@ -87,8 +85,6 @@ Command SqlEngine::getCommand(string command) {
         command_enum = NOT_VALID;
     }
     return command_enum;
-
-
 }
 
 string SqlEngine::getParamsInBrakets(string command) {
@@ -118,6 +114,82 @@ string SqlEngine::removeSpace(string input) {
 
 }
 
+void SqlEngine::executeCreateTable(string command) {
+    try {
+        string out_str;
+        out_str = removeSpace(command);
+        string::size_type i = out_str.find(CREATE_TABLE_D);
+
+        if (i != 0)
+            throw invalid_argument("ERROR: command not valid");
+
+        removeSubstrs(out_str,CREATE_TABLE_D);
+        string nameTable = findNameTable(out_str);
+
+        if (nameTable.compare("") == 0)
+            throw invalid_argument("ERROR: Table name not defined");
+
+        removeSubstrs(out_str,nameTable);
+        cout << "Create Table: " << nameTable << endl;
+        cout << "Parameters: ";
+        vector<string> params = getParams(out_str);
+        for(int i = 0; i < params.size(); i++){
+            cout << params[i] << ", ";
+            //TODO getParamInfo
+            string paramType = "";
+            string paramName = "";
+
+            getParamInfo(params[i], paramType, paramName);
+        }
+        cout << endl;
+    }
+    catch (invalid_argument &exc) {
+        cerr << exc.what() << endl;
+    }
+}
+
+void SqlEngine::removeSubstrs(string& s, string p) {
+    string::size_type n = p.length();
+    for (string::size_type i = s.find(p);
+         i != string::npos;
+         i = s.find(p))
+        s.erase(i, n);
+}
+
+string SqlEngine::findNameTable(string c) {
+    string nameTable = "";
+    string ch = "(";
+    string::size_type st = c.find(ch);
+    if (st != string::npos){
+        int len = c.length() - st;
+        c.erase(st, len);
+        nameTable = c;
+    }
+    return nameTable;
+}
+
+vector<string> SqlEngine::getParams(string c) {
+    removeSubstrs(c, "(");
+    removeSubstrs(c, ");");
+    return vector<string>(splitValueByDelimiter(c, ","));
+}
+
+vector<string> SqlEngine::splitValueByDelimiter(string s, string delimiter) {
+    vector<string> ret;
+    size_t pos = 0;
+    std::string token;
+    while ((pos = s.find(delimiter)) != std::string::npos) {
+        token = s.substr(0, pos);
+        ret.push_back(token);
+        s.erase(0, pos + delimiter.length());
+    }
+    ret.push_back(s);
+    return ret;
+}
+
+void SqlEngine::getParamInfo(const string &basicString, string &basicString1, string &basicString2) {
+
+}
 
 
 

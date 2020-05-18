@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.cpp
+SqlEngine.h
+D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
+
 D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
 iostream
 -
@@ -57,12 +61,6 @@ Row.h
 D:/SqlEngine/sqlEngine/Table/Row.h
 Column.h
 D:/SqlEngine/sqlEngine/Table/Column.h
-
-D:/SqlEngine/sqlEngine/main.cpp
-iostream
--
-SqlEngine/SqlEngine.h
-D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
 
 D:/SqlEngine/sqlEngine/types.h
 
