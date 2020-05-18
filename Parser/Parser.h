@@ -42,8 +42,7 @@ private:
     string removeSpace(string input);
     int getParamsInBrakets(string command_down);
     Command getCommand(string command_input);
-    Type getValuesType(vector<string> params, int cont);
-
+    Type getValuesType(vector<string> value);
 
 
     //ATTRIBUTES

@@ -106,31 +106,43 @@ int Parser::getParamsInBrakets(string command_down) {
     string end = ")";
     string delim = ",";
     size_t p = 0;
+    size_t space = 0;
     int cont;
 
     command_down.erase(0, command_down.find(start) + 1);
     command_down.erase(command_down.find(')'), command_down.find(';'));
     command_down += ',';
-    vector<string> params;
+    vector<string> tmp;
+    vector<string>params;
     cont = 0;
     while ((p = command_down.find(delim)) != string::npos) {
-        params.push_back(command_down.substr(0, p));
+        tmp.push_back(command_down.substr(0, p));
+        params.push_back(removeSpace(tmp.at(cont)));
         cont++;
-        string value;
-        value = params.at(cont - 1).back();
-        //getValuesType(params, cont);
         command_down.erase(0, p + delim.length());
     }
+
+    vector<string> value;
+
+    for(int i = 0; i != params.size(); i++) {
+         size_t lastdelim = 0;
+         size_t firstdelim = 0;
+         lastdelim = params.at(i).find(',') != string ::npos;
+         firstdelim = params.at(i).find(' ') != string::npos;
+         params.at(i).erase(0, params.size()-lastdelim);
+         value.push_back(params.at(i).erase(0, params.size()-firstdelim));
+
+    }
+
 
 
     return 0;
 }
 
 
-Type Parser::getValuesType(vector<string> params, int cont) {
+Type Parser::getValuesType(vector<string> value) {
 
-    Type type_enum;
-
+  Type type_enum;
 
 
     try {
@@ -183,6 +195,7 @@ string Parser::removeSpace(string input) {
     return input;
 
 }
+
 
 
 
