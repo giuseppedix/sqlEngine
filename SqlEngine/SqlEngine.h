@@ -1,5 +1,3 @@
-
-
 #ifndef SQLENGINE_SQLENGINE_H
 #define SQLENGINE_SQLENGINE_H
 
@@ -10,6 +8,7 @@
 #include "../Table/Table.h"
 #include "State.h"
 #include <bitset>
+
 using namespace std;
 
 #define CREATE_TABLE_D "createtable"
@@ -40,8 +39,8 @@ using namespace std;
 enum Command {CREATE_TABLE, DROP_TABLE, INSERT_INTO, DELETE_FROM, TRUNCATE_TABLE, UPDATE, SELECT, ORDER_BY, NOT_VALID};
 
 class SqlEngine{
-public:
 
+public:
     //METHODS
     SqlEngine() = default;
     int execute(const string &command);
@@ -50,7 +49,6 @@ public:
 private:
     // METHODS
     string removeSpace(string input);
-    string getParamsInBrakets(string command);
     Command getCommand(string command_input);
     vector<string> getValuesType();
     //ATTRIBUTES
@@ -58,6 +56,8 @@ private:
 
 
     void executeCreateTable(string basicString);
+
+    void executeInsertInto(string command);
 
     void removeSubstrs(string &s, string p);
 

@@ -1,7 +1,3 @@
-//
-// Created by gdisi on 06/05/2020.
-//
-
 #ifndef SQLENGINE_ROW_H
 #define SQLENGINE_ROW_H
 #include <iostream>

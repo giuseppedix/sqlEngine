@@ -10,23 +10,20 @@ int main() {
 
     string command_input;
     bool quit = false;
-    do{
+    do {
         string command;
         cout << sqlEngine.getState().getDbName() << ">> ";
-        do{
+        do {
             getline(cin, command_input);
-            command+=command_input;
-        }
-        while (command_input.back() != ';');
+            command += command_input;
+        } while (command_input.back() != ';');
 
-        if(command.find("QUIT")!= string::npos){
+        if (command.find("QUIT") != string::npos) {
             quit = true;
-        }
-        else{
+        } else {
             sqlEngine.execute(command);
         }
         cout << endl;
-    }
-    while (!quit);
+    } while (!quit);
     return 0;
 }

@@ -1,9 +1,7 @@
-//
-// Created by gdisi on 16/05/2020.
-//
-
 #include "State.h"
+
 using namespace std;
+
 string State::getDbName() {
     return dbName;
 }
@@ -13,11 +11,11 @@ void State::setDbName(const string &dbNameI) {
 }
 
 void State::addTable(string nameTable, vector<int>paramsMasks, vector<string> paramsNames) {
+
     bool found = false;
     Table table;
     int index = 0;
     vector<Column> columns;
-
 
     try{
         for(int i = 0; i < tables.size(); i++){

@@ -1,7 +1,6 @@
-
-
 #ifndef SQLENGINE_TABLE_H
 #define SQLENGINE_TABLE_H
+
 #include <vector>
 #include <iostream>
 #include "Row.h"
@@ -10,6 +9,7 @@
 using namespace std;
 
 class Table {
+
 public:
     Table() = default;
     string tableName;

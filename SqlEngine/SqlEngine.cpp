@@ -1,7 +1,7 @@
 #include "SqlEngine.h"
 
-
 int SqlEngine::execute(const string &command) {
+
     string command_down;
     int ret = 0;
 
@@ -10,7 +10,6 @@ int SqlEngine::execute(const string &command) {
         transform(command_down.begin(), command_down.end(), command_down.begin(), ::tolower);
         switch (getCommand((command_down))) {
             case CREATE_TABLE:
-                //TODO -> executeCreateTable
                 executeCreateTable(command_down);
                 break;
             case DROP_TABLE:
@@ -19,6 +18,7 @@ int SqlEngine::execute(const string &command) {
                 break;
             case INSERT_INTO:
                 //TODO -> executeInsertInto
+                executeInsertInto(command_down);
                 cout << "insert la tabella";
                 break;
             case DELETE_FROM:
@@ -88,14 +88,7 @@ Command SqlEngine::getCommand(string command) {
     return command_enum;
 }
 
-string SqlEngine::getParamsInBrakets(string command) {
-    int id, age;
-    float salary;
-    string name, address;
 
-
-    return std::string();
-}
 
 State SqlEngine::getState() const {
     return state;
@@ -116,27 +109,30 @@ string SqlEngine::removeSpace(string input) {
 }
 
 void SqlEngine::executeCreateTable(string command) {
+
     try {
         string out_str;
         out_str = removeSpace(command);
-        string::size_type i = out_str.find(CREATE_TABLE_D);
+        size_t i = out_str.find(CREATE_TABLE_D);
 
         if (i != 0)
             throw invalid_argument("ERROR: command not valid");
 
-        removeSubstrs(out_str,CREATE_TABLE_D);
+        removeSubstrs(out_str, CREATE_TABLE_D);
         string nameTable = findNameTable(out_str);
 
         if (nameTable.compare("") == 0)
             throw invalid_argument("ERROR: Table name not defined");
 
-        removeSubstrs(out_str,nameTable);
+        removeSubstrs(out_str, nameTable);
         cout << "Create Table: " << nameTable << endl;
         cout << "Parameters: ";
+
         vector<string> params = getParams(out_str);
         vector<int> paramsMasks;
         vector<string> paramsNames;
-        for(int i = 0; i < params.size(); i++){
+
+        for (int i = 0; i < params.size(); i++) {
             cout << params[i] << ", ";
             //TODO getParamInfo
             int paramMask = MASK_INVALID;
@@ -155,8 +151,8 @@ void SqlEngine::executeCreateTable(string command) {
     }
 }
 
-void SqlEngine::removeSubstrs(string& s, string p) {
-    string::size_type n = p.length();
+void SqlEngine::removeSubstrs(string &s, string p) {
+    size_t n = p.length();
     for (string::size_type i = s.find(p);
          i != string::npos;
          i = s.find(p))
@@ -166,8 +162,8 @@ void SqlEngine::removeSubstrs(string& s, string p) {
 string SqlEngine::findNameTable(string c) {
     string nameTable = "";
     string ch = "(";
-    string::size_type st = c.find(ch);
-    if (st != string::npos){
+    size_t st = c.find(ch);
+    if (st != string::npos) {
         int len = c.length() - st;
         c.erase(st, len);
         nameTable = c;
@@ -184,8 +180,8 @@ vector<string> SqlEngine::getParams(string c) {
 vector<string> SqlEngine::splitValueByDelimiter(string s, string delimiter) {
     vector<string> ret;
     size_t pos = 0;
-    std::string token;
-    while ((pos = s.find(delimiter)) != std::string::npos) {
+    string token;
+    while ((pos = s.find(delimiter)) != string::npos) {
         token = s.substr(0, pos);
         ret.push_back(token);
         s.erase(0, pos + delimiter.length());
@@ -197,45 +193,114 @@ vector<string> SqlEngine::splitValueByDelimiter(string s, string delimiter) {
 void SqlEngine::getParamInfo(const string &s, int &paramMask, string &name) {
 
     int i = 0;
+    int j = 0;
+    int q = 0;
 
-    if(s.find("int") != string::npos){
-        i = s.find("int");
-        paramMask |= MASK_INT;
+    try{
+        if (s.find("int") != string::npos) {
+            i = s.find("int");
+            paramMask |= MASK_INT;
+        } else if (s.find("float") != string::npos) {
+            i = s.find("float");
+            paramMask |= MASK_FLOAT;
+        } else if (s.find("text") != string::npos) {
+            i = s.find("text");
+            paramMask |= MASK_TEXT;
+        } else if (s.find("date") != string::npos) {
+            i = s.find("date");
+            paramMask |= MASK_DATE;
+        } else if (s.find("time") != string::npos) {
+            i = s.find("time");
+            paramMask |= MASK_TIME;
+        } else if (s.find("char") != string::npos) {
+            i = s.find("char");
+            paramMask |= MASK_CHAR;
+        }
+
+        string str;
+        str.assign(s);
+        str.erase(i, str.length() - i);
+        name = str;
+        cout << name << endl;
+        if (s.find("notnull") != string::npos) {
+            j = s.find("notnull");
+            paramMask |= MASK_NOTNULL;
+        }
+        if (s.find("autoincrement") != string::npos) {
+            q = s.find("autoincrement");
+            paramMask |= MASK_AUTOINCREMENT;
+        }
+        /*if((j > q) || (i > j) || (q < i)){
+            throw invalid_argument("ERROR: Wrong order parameters"); //ERRORE
+        }*/
+        bitset<8> x(paramMask);
+        cout << x << endl;
     }
-    else if(s.find("float") != string::npos){
-        i = s.find("float");
-        paramMask |= MASK_FLOAT;
-    }
-    else if(s.find("text") != string::npos){
-        i = s.find("text");
-        paramMask |= MASK_TEXT;
-    }
-    else if(s.find("date") != string::npos){
-        i = s.find("date");
-        paramMask |= MASK_DATE;
-    }
-    else if(s.find("time") != string::npos){
-        i = s.find("time");
-        paramMask |= MASK_TIME;
-    }
-    else if(s.find("char") != string::npos){
-        i = s.find("char");
-        paramMask |= MASK_CHAR;
-    }
-    string str;
-    str.assign(s);
-    str.erase(i, str.length() - i);
-    name = str;
-    cout << name << endl;
-    if(s.find("notnull") != string::npos){
-        paramMask |= MASK_NOTNULL;
-    }
-    if(s.find("autoincrement") != string::npos){
-        paramMask |= MASK_AUTOINCREMENT;
+    catch (invalid_argument &exc) {
+        cerr << exc.what() << endl;
     }
 
-    bitset<8> x(paramMask);
-    cout << x << endl;
+}
+
+void SqlEngine::executeInsertInto(string command) {
+
+    try{
+
+        string out_str;
+        string field;
+        string value;
+        int q = 0;
+        int j = 0;
+        size_t i = out_str.find(INSERT_INTO_D);
+
+        if (i != 0)
+            throw invalid_argument("ERROR: Fields are empty");
+
+        out_str = removeSpace(command);
+        removeSubstrs(out_str, INSERT_INTO_D);
+        removeSubstrs(out_str, "values");
+        size_t p = out_str.find(')');
+        field = out_str.substr(0,p+1);
+        value = out_str.substr(p+1, out_str.size());
+        size_t f = value.find(';');
+        value.erase(f);
+
+        vector<string> fields = getParams(field);
+        vector<string> values = getParams(value);
+
+        if(fields.at(j) == ""){ //BACO
+            throw invalid_argument("ERROR: Fields are empty");
+        } else if(values.at(q) == ""){
+            throw invalid_argument("ERROR: Values are empty");
+        }
+
+    }
+    catch (invalid_argument &exc) {
+        cerr << exc.what() << endl;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

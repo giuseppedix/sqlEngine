@@ -6,9 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.cpp
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.cpp
+SqlEngine.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
+
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
+iostream
+-
+vector
+-
+sstream
+-
+algorithm
+-
+../Table/Table.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
 State.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
+bitset
+-
 
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
 ../Table/Table.h

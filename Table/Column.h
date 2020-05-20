@@ -1,9 +1,6 @@
-//
-// Created by gdisi on 06/05/2020.
-//
-
 #ifndef SQLENGINE_COLUMN_H
 #define SQLENGINE_COLUMN_H
+
 #include <vector>
 #include <iostream>
 #include "../types.h"

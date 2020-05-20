@@ -1,6 +1,4 @@
-//
-// Created by gdisi on 06/05/2020.
-//
+
 
 #ifndef SQLENGINE_ROWELEMENT_H
 #define SQLENGINE_ROWELEMENT_H
