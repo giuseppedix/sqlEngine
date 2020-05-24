@@ -35,7 +35,6 @@ using namespace std;
 #define MASK_AUTOINCREMENT 0b010000 //autoincrement
 #define MASK_PRIMARYKEY 0b100000 //primarikey
 
-
 enum Command {CREATE_TABLE, DROP_TABLE, INSERT_INTO, DELETE_FROM, TRUNCATE_TABLE, UPDATE, SELECT, ORDER_BY, NOT_VALID};
 
 class SqlEngine{
@@ -50,24 +49,19 @@ private:
     // METHODS
     string removeSpace(string input);
     Command getCommand(string command_input);
-    vector<string> getValuesType();
+    void executeCreateTable(string basicString);
+    void executeInsertInto(string command);
+    void removeSubstrs(string &s, string p);
+    string findNameTable(string basicString);
+    vector<string> getParams(string basicString);
+    vector<string> splitValueByDelimiter(string basicString, const string string);
+    void getParamInfo(const string &s, int &paramMask, string &name);
+
     //ATTRIBUTES
     State state;
 
 
-    void executeCreateTable(string basicString);
 
-    void executeInsertInto(string command);
-
-    void removeSubstrs(string &s, string p);
-
-    string findNameTable(string basicString);
-
-    vector<string> getParams(string basicString);
-
-    vector<string> splitValueByDelimiter(string basicString, const string string);
-
-    void getParamInfo(const string &s, int &paramMask, string &name);
 };
 
 #endif

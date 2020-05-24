@@ -26,9 +26,17 @@ State.h
 bitset
 -
 
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.cpp
+State.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
+
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
 ../Table/Table.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
+
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.cpp
+Column.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.h
 
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.h
 vector
@@ -38,11 +46,19 @@ iostream
 ../types.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
 
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Row.cpp
+Row.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Row.h
+
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Row.h
 iostream
 -
 vector
 -
+RowElement.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
+
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.cpp
 RowElement.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
 
@@ -54,6 +70,12 @@ vector
 ../types.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
 
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.cpp
+Table.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
+../SqlEngine/SqlEngine.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
+
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
 vector
 -
@@ -63,6 +85,14 @@ Row.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Row.h
 Column.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.h
+regex
+-
+
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/main.cpp
+iostream
+-
+SqlEngine/SqlEngine.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
 
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
 

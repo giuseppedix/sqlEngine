@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Row.h"
 #include "Column.h"
-
+#include <regex>
 using namespace std;
 
 class Table {
@@ -17,6 +17,8 @@ public:
     vector<Column> cols;
     string getName(){return tableName;};
     void setName(string name){ this->tableName = name;};
+    int addRow (vector<string>fields, vector <string> values);
+
 
     const string &getTableName() const {
         return tableName;
@@ -42,7 +44,14 @@ public:
         Table::cols = cols;
     }
 
-
+private:
+    bool isFieldPresent(string field);
+    int getnumberNotNull();
+    vector<Column> getNotNullCols();
+    bool checkNotNullinFields(vector<string>fields);
+    vector<int> getMasks(vector<string> fields);
+    bool checkMasks(vector<int> masks, vector<string> values);
+    int getTypeFromValue(string value);
 };
 
 

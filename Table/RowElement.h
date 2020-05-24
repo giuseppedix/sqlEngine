@@ -1,5 +1,3 @@
-
-
 #ifndef SQLENGINE_ROWELEMENT_H
 #define SQLENGINE_ROWELEMENT_H
 #include <iostream>

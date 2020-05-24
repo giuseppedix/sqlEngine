@@ -17,7 +17,6 @@ int SqlEngine::execute(const string &command) {
                 cout << "Drop la tabella";
                 break;
             case INSERT_INTO:
-                //TODO -> executeInsertInto
                 executeInsertInto(command_down);
                 cout << "insert la tabella";
                 break;
@@ -88,8 +87,6 @@ Command SqlEngine::getCommand(string command) {
     return command_enum;
 }
 
-
-
 State SqlEngine::getState() const {
     return state;
 }
@@ -121,10 +118,12 @@ void SqlEngine::executeCreateTable(string command) {
         removeSubstrs(out_str, CREATE_TABLE_D);
         string nameTable = findNameTable(out_str);
 
-        if (nameTable.compare("") == 0)
+        if (nameTable == "")
             throw invalid_argument("ERROR: Table name not defined");
 
-        removeSubstrs(out_str, nameTable);
+        size_t in = out_str.find('(');
+        out_str.erase(0, in);
+        //removeSubstrs(out_str, nameTable); --> Bug nome
         cout << "Create Table: " << nameTable << endl;
         cout << "Parameters: ";
 
@@ -134,7 +133,6 @@ void SqlEngine::executeCreateTable(string command) {
 
         for (int i = 0; i < params.size(); i++) {
             cout << params[i] << ", ";
-            //TODO getParamInfo
             int paramMask = MASK_INVALID;
             string paramName = "";
 
@@ -153,10 +151,11 @@ void SqlEngine::executeCreateTable(string command) {
 
 void SqlEngine::removeSubstrs(string &s, string p) {
     size_t n = p.length();
-    for (string::size_type i = s.find(p);
+    for (size_t i = s.find(p);
          i != string::npos;
          i = s.find(p))
         s.erase(i, n);
+
 }
 
 string SqlEngine::findNameTable(string c) {
@@ -196,7 +195,7 @@ void SqlEngine::getParamInfo(const string &s, int &paramMask, string &name) {
     int j = 0;
     int q = 0;
 
-    try{
+    try {
         if (s.find("int") != string::npos) {
             i = s.find("int");
             paramMask |= MASK_INT;
@@ -230,9 +229,10 @@ void SqlEngine::getParamInfo(const string &s, int &paramMask, string &name) {
             q = s.find("autoincrement");
             paramMask |= MASK_AUTOINCREMENT;
         }
-        /*if((j > q) || (i > j) || (q < i)){
-            throw invalid_argument("ERROR: Wrong order parameters"); //ERRORE
-        }*/
+
+        if (((j > q) || (i > j) || (q < i)) && ((j != 0) && (q != 0))) {
+            throw invalid_argument("ERROR: Wrong order parameters");
+        }
         bitset<8> x(paramMask);
         cout << x << endl;
     }
@@ -244,64 +244,33 @@ void SqlEngine::getParamInfo(const string &s, int &paramMask, string &name) {
 
 void SqlEngine::executeInsertInto(string command) {
 
-    try{
-
+    try {
         string out_str;
-        string field;
-        string value;
-        int q = 0;
-        int j = 0;
-        size_t i = out_str.find(INSERT_INTO_D);
-
-        if (i != 0)
-            throw invalid_argument("ERROR: Fields are empty");
+        string field, value, nameTable;
+        int a = 0;
+        int b = 0;
 
         out_str = removeSpace(command);
+        a = out_str.find(INSERT_INTO_D);
+        b = out_str.find("values");
+        if (b < a) {
+            throw invalid_argument("ERROR: Wrong command order");
+        }
         removeSubstrs(out_str, INSERT_INTO_D);
         removeSubstrs(out_str, "values");
-        size_t p = out_str.find(')');
-        field = out_str.substr(0,p+1);
-        value = out_str.substr(p+1, out_str.size());
-        size_t f = value.find(';');
-        value.erase(f);
-
-        vector<string> fields = getParams(field);
-        vector<string> values = getParams(value);
-
-        if(fields.at(j) == ""){ //BACO
-            throw invalid_argument("ERROR: Fields are empty");
-        } else if(values.at(q) == ""){
-            throw invalid_argument("ERROR: Values are empty");
+        nameTable = findNameTable(out_str);
+        if (nameTable == "") {
+            throw invalid_argument("ERROR: Name Table not defined");
         }
-
+        removeSubstrs(out_str, nameTable);
+        vector<string> args = splitValueByDelimiter(out_str, ")(");
+        vector<string> fields = getParams(args[0]);
+        vector<string> values = getParams(args[1]);
+        state.setParamsTable(nameTable, fields, values);
     }
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

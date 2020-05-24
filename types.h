@@ -1,6 +1,4 @@
-//
-// Created by gdisi on 06/05/2020.
-//
+
 
 #ifndef SQLENGINE_TYPES_H
 #define SQLENGINE_TYPES_H

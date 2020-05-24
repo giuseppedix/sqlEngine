@@ -25,5 +25,6 @@ int main() {
         }
         cout << endl;
     } while (!quit);
+
     return 0;
 }
