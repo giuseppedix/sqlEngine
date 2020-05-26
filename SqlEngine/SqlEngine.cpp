@@ -122,7 +122,6 @@ void SqlEngine::executeCreateTable(string command) {
 
         size_t in = out_str.find('(');
         out_str.erase(0, in);
-        //removeSubstrs(out_str, nameTable); --> Bug nome corretto
         cout << "Create Table: " << nameTable << endl;
         cout << "Parameters: ";
 
@@ -180,7 +179,7 @@ vector<string> SqlEngine::getValueInQuote(string s) {
     int count = 0;
     string delimiter = "\"";
     size_t pos = 0;
-    while ( ( (pos = s.find(delimiter)) != string::npos)   ) {
+    while (((pos = s.find(delimiter)) != string::npos)) {
         count++;
         if (count % 2) {
             s.erase(0, pos + delimiter.length());

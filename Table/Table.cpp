@@ -1,10 +1,11 @@
 #include "Table.h"
 #include "../SqlEngine/SqlEngine.h"
+#include "CellFactory.h"
 
 int Table::addRow(vector<string> fields, vector<string> values) {
 
     bool found = true;
-    vector<int> masks;
+    vector<int> masks = getMasks(fields);
     try {
         if (fields.size() < getnumberNotNull()) {
             throw invalid_argument("ERROR: Not null fields not respect");
@@ -26,6 +27,17 @@ int Table::addRow(vector<string> fields, vector<string> values) {
                 throw invalid_argument("ERROR: Invalid fields");
             }
         }
+        CellFactory cellFactory;
+        vector <RowElement*> row = cellFactory.getCell(masks); // il vector contiene tutti gli
+                                                                // indirizzi di memoria allocati in base alla mask
+
+
+
+
+        //cella per ogni field
+        //quindi popolare vector row
+        // ordinare i campi in base alle columns
+        //row.addElements(values)
     }
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;
