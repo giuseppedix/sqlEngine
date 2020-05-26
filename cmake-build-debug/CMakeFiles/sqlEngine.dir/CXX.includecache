@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.cpp
+D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.cpp
 SqlEngine.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
+D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
 
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
+D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
 iostream
 -
 vector
@@ -20,51 +20,51 @@ sstream
 algorithm
 -
 ../Table/Table.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
+D:/SqlEngine/sqlEngine/Table/Table.h
 State.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
+D:/SqlEngine/sqlEngine/SqlEngine/State.h
 bitset
 -
 
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
+D:/SqlEngine/sqlEngine/SqlEngine/State.h
 ../Table/Table.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
+D:/SqlEngine/sqlEngine/Table/Table.h
 
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.h
+D:/SqlEngine/sqlEngine/Table/Column.h
 vector
 -
 iostream
 -
 ../types.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
+D:/SqlEngine/sqlEngine/types.h
 
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Row.h
+D:/SqlEngine/sqlEngine/Table/Row.h
 iostream
 -
 vector
 -
 RowElement.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
+D:/SqlEngine/sqlEngine/Table/RowElement.h
 
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
+D:/SqlEngine/sqlEngine/Table/RowElement.h
 iostream
 -
 vector
 -
 ../types.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
+D:/SqlEngine/sqlEngine/types.h
 
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
+D:/SqlEngine/sqlEngine/Table/Table.h
 vector
 -
 iostream
 -
 Row.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Row.h
+D:/SqlEngine/sqlEngine/Table/Row.h
 Column.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.h
+D:/SqlEngine/sqlEngine/Table/Column.h
 regex
 -
 
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
+D:/SqlEngine/sqlEngine/types.h
 

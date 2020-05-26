@@ -186,6 +186,7 @@ vector<string> SqlEngine::getValueInQuote(string s) {
             s.erase(0, pos + delimiter.length());
         } else {
             ret.push_back(s.substr(0, pos));
+            s.erase(0, pos + delimiter.length());
         }
     }
     return ret;
@@ -245,6 +246,20 @@ void SqlEngine::getParamInfo(const string &s, int &paramMask, string &name) {
             paramMask |= MASK_AUTOINCREMENT;
         }
 
+        if ((j != 0) && (q != 0)){
+            if (((j > q) || (i > j) || (q < i))) {
+                throw invalid_argument("ERROR: Wrong order parameters");
+            }
+        } else if (q == 0 && j != 0){
+            if (i > j) {
+                throw invalid_argument("ERROR: Wrong order parameters");
+            }
+        } else if (j == 0 && q != 0){
+            if (q < i) {
+                throw invalid_argument("ERROR: Wrong order parameters");
+            }
+        }
+
         if (((j > q) || (i > j) || (q < i)) && ((j != 0) && (q != 0))) {
             throw invalid_argument("ERROR: Wrong order parameters");
         }
@@ -254,7 +269,6 @@ void SqlEngine::getParamInfo(const string &s, int &paramMask, string &name) {
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;
     }
-
 }
 
 void SqlEngine::executeInsertInto(string command) {
@@ -278,10 +292,18 @@ void SqlEngine::executeInsertInto(string command) {
         }
         size_t in = out_str.find('(');
         out_str.erase(0, in);
-        vector<string> quoteargs = getValueInQuote(out_str);
+        vector<string> quoteargs = getValueInQuote(command);
+        for (int b = 0; b < quoteargs.size(); b++){
+            string removed = removeSpace(quoteargs[b]);
+            removeSubstrs(out_str, removed);
+        }
+        removeSubstrs(out_str, ",\"\"");
         vector<string> args = splitValueByDelimiter(out_str, ")(");
         vector<string> fields = getParams(args[0]);
         vector<string> values = getParams(args[1]);
+        for (int b = 0; b < quoteargs.size(); b++){
+            values.push_back(quoteargs[b]);
+        }
         state.setParamsTable(nameTable, fields, values);
     }
     catch (invalid_argument &exc) {

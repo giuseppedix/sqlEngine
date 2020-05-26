@@ -61,8 +61,6 @@ private:
 
     //ATTRIBUTES
     State state;
-
-
 };
 
 #endif
