@@ -18,7 +18,6 @@ void State::addTable(string nameTable, vector<int> paramsMasks, vector<string> p
     vector<Column> columns;
 
     try {
-
         if (tablePresent(nameTable, index)) {
             throw invalid_argument("ERROR: Table already exists!");
         } else {
@@ -46,7 +45,6 @@ bool State::tablePresent(string nametable, int &index) {
             index = i;
         }
     }
-
     return found;
 }
 
@@ -62,5 +60,4 @@ void State::setParamsTable(string nameTable, vector<string> fields, vector<strin
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;
     }
-
 }

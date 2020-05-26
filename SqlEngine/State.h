@@ -6,7 +6,9 @@
 class State {
 
 public:
+    //DEFAULT CONSTRUCTOR
     State() = default;
+    //METHODS
     vector<Table> getTables() const;
     string getDbName();
     void setDbName(const string &dnName);
@@ -15,6 +17,7 @@ public:
     void setParamsTable(string nameTable, vector<string> fields, vector<string> values);
 
 private:
+    //ATTRIBUTES
     string dbName;
     vector <Table> tables;
 

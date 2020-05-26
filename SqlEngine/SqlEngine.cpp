@@ -102,7 +102,6 @@ string SqlEngine::removeSpace(string input) {
 
     input.erase(std::remove(input.begin(), input.end(), ' '), input.end());
     return input;
-
 }
 
 void SqlEngine::executeCreateTable(string command) {
@@ -123,7 +122,7 @@ void SqlEngine::executeCreateTable(string command) {
 
         size_t in = out_str.find('(');
         out_str.erase(0, in);
-        //removeSubstrs(out_str, nameTable); --> Bug nome
+        //removeSubstrs(out_str, nameTable); --> Bug nome corretto
         cout << "Create Table: " << nameTable << endl;
         cout << "Parameters: ";
 
@@ -142,7 +141,6 @@ void SqlEngine::executeCreateTable(string command) {
         }
         cout << endl;
         state.addTable(nameTable, paramsMasks, paramsNames);
-
     }
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;
@@ -174,6 +172,23 @@ vector<string> SqlEngine::getParams(string c) {
     removeSubstrs(c, "(");
     removeSubstrs(c, ");");
     return vector<string>(splitValueByDelimiter(c, ","));
+}
+
+vector<string> SqlEngine::getValueInQuote(string s) {
+    string tmp;
+    vector<string> ret;
+    int count = 0;
+    string delimiter = "\"";
+    size_t pos = 0;
+    while ( ( (pos = s.find(delimiter)) != string::npos)   ) {
+        count++;
+        if (count % 2) {
+            s.erase(0, pos + delimiter.length());
+        } else {
+            ret.push_back(s.substr(0, pos));
+        }
+    }
+    return ret;
 }
 
 vector<string> SqlEngine::splitValueByDelimiter(string s, string delimiter) {
@@ -245,8 +260,7 @@ void SqlEngine::getParamInfo(const string &s, int &paramMask, string &name) {
 void SqlEngine::executeInsertInto(string command) {
 
     try {
-        string out_str;
-        string field, value, nameTable;
+        string field, value, nameTable, out_str;
         int a = 0;
         int b = 0;
 
@@ -262,7 +276,9 @@ void SqlEngine::executeInsertInto(string command) {
         if (nameTable == "") {
             throw invalid_argument("ERROR: Name Table not defined");
         }
-        removeSubstrs(out_str, nameTable);
+        size_t in = out_str.find('(');
+        out_str.erase(0, in);
+        vector<string> quoteargs = getValueInQuote(out_str);
         vector<string> args = splitValueByDelimiter(out_str, ")(");
         vector<string> fields = getParams(args[0]);
         vector<string> values = getParams(args[1]);

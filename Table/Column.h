@@ -10,15 +10,14 @@ using namespace std;
 class Column {
 
 public:
+    //METHODS
     int getMask() const;
-
     const string &getName() const;
-
     void setName(const string &name);
-
     void setMask(int mask);
 
 private:
+    //ATTRIBUTES
     string name;
     int mask;
 };

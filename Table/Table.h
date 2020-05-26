@@ -11,15 +11,20 @@ using namespace std;
 class Table {
 
 public:
+    //DEFAULT CONSTRUCTOR
     Table() = default;
+    //ATTRIBUTES
     string tableName;
     vector<Row> rows;
     vector<Column> cols;
-    string getName(){return tableName;};
-    void setName(string name){ this->tableName = name;};
+    //METHODS
     int addRow (vector<string>fields, vector <string> values);
-
-
+    string getName(){
+        return tableName;
+    }
+    void setName(string name){
+        this->tableName = name;
+    }
     const string &getTableName() const {
         return tableName;
     }
@@ -45,6 +50,7 @@ public:
     }
 
 private:
+    //METHODS
     bool isFieldPresent(string field);
     int getnumberNotNull();
     vector<Column> getNotNullCols();

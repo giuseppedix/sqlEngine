@@ -40,8 +40,9 @@ enum Command {CREATE_TABLE, DROP_TABLE, INSERT_INTO, DELETE_FROM, TRUNCATE_TABLE
 class SqlEngine{
 
 public:
-    //METHODS
+    //DEFAULT CONSTRUCTOR
     SqlEngine() = default;
+    //METHODS
     int execute(const string &command);
     int loadState(const string &dirPath);
     State getState() const;
@@ -53,13 +54,13 @@ private:
     void executeInsertInto(string command);
     void removeSubstrs(string &s, string p);
     string findNameTable(string basicString);
+    vector<string> getValueInQuote(string s);
     vector<string> getParams(string basicString);
     vector<string> splitValueByDelimiter(string basicString, const string string);
     void getParamInfo(const string &s, int &paramMask, string &name);
 
     //ATTRIBUTES
     State state;
-
 
 
 };
