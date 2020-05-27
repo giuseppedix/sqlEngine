@@ -27,9 +27,20 @@ int Table::addRow(vector<string> fields, vector<string> values) {
                 throw invalid_argument("ERROR: Invalid fields");
             }
         }
-        CellFactory cellFactory;
-        vector <RowElement*> row = cellFactory.getCell(masks); // il vector contiene tutti gli
+
+        vector <RowElement*> row;
+        for (int i = 0; i < cols.size(); i++){
+            CellFactory cellFactory(masks[i], values[i]);
+            //RowElement* cell = cellFactory.getCell();
+            row.push_back(cellFactory.getCell());
+        }
+        Row rT;
+        rT.setRow(row);
+        checkRow(row);
+
+        rows.push_back(rT);
                                                                 // indirizzi di memoria allocati in base alla mask
+        cout << "test" << endl;
 
 
 
@@ -141,4 +152,31 @@ bool Table::checkMasks(vector<int> masks, vector<string> values) {
         check = false;
     }
     return check;
+}
+
+void Table::checkRow(vector<RowElement *> row) {
+    for (int i = 0; i < cols.size(); i++){
+        switch (cols[i].getMask()) {
+            case MASK_INT:{
+                int vali = ((Cell<int>*) row[i])->getValue();
+                cout << "INT VALUE: " << vali << endl;
+                break;
+            }
+            case MASK_FLOAT:{
+                float valf = ((Cell<float>*) row[i])->getValue();
+                cout << "FLOAT VALUE: " << valf << endl;
+                break;
+            }
+            case MASK_TEXT:{
+                string vals = ((Cell<string>*) row[i])->getValue();
+                cout << "FLOAT VALUE: " << vals << endl;
+                break;
+            }
+            case MASK_TIME:
+            case MASK_CHAR:
+            case MASK_DATE:
+            default:
+                break;
+        }
+    }
 }

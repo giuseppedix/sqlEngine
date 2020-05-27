@@ -58,6 +58,8 @@ private:
     vector<int> getMasks(vector<string> fields);
     bool checkMasks(vector<int> masks, vector<string> values);
     int getTypeFromValue(string value);
+
+    void checkRow(vector<RowElement *> row);
 };
 
 

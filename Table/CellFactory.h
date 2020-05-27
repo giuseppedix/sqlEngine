@@ -16,17 +16,12 @@ public:
     // DISTRUTTORE
     ~CellFactory();
     // CONSTRUCTOR
-    CellFactory();
-    vector<RowElement*> getCell(vector<int> masks);
+    CellFactory(int mask, string val);
+    RowElement* getCell();
     vector<string> addElements(vector<string> values);
-
-
-
 
 private:
     RowElement *cell;
-
-
 };
 
 

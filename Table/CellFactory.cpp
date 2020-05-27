@@ -9,42 +9,28 @@
 //    case(INT):
 //        cell = new Cell<tipo>()
 
-CellFactory::CellFactory() {
-    cell = nullptr;
+CellFactory::CellFactory(int mask, string value) {
+    if(mask & MASK_INT){
+        cell = new Cell<int>(stoi(value));
+    }else if(mask & MASK_FLOAT){
+        cell = new Cell<float>(stof(value));
+    }else if(mask & MASK_TEXT) {
+        cell = new Cell<string>(value);
+    } else if(mask & MASK_TIME) {
+        //cell = new Cell<string>();
+    }else if(mask & MASK_DATE){
+        //cell = new Cell<string>();
+    }else if(mask & MASK_CHAR){
+        cell = new Cell<char>((char) value.c_str());
+    }
 }
 
 CellFactory::~CellFactory() {
-    delete [] cell;
-    cell = nullptr;
+    //delete [] cell;
 }
 
-vector<RowElement*> CellFactory::getCell(vector<int> masks) {
-    vector<RowElement*> ret;
-
-    for (int i = 0; i < masks.size(); i++){
-        if(masks[i] & MASK_INT){
-            cell = new Cell<int>();
-            ret.push_back(cell);
-        }else if(masks[i] & MASK_FLOAT){
-            cell = new Cell<float>();
-            ret.push_back(cell);
-        }else if(masks[i] & MASK_TEXT) {
-            cell = new Cell<string>();
-            ret.push_back(cell);
-        } else if(masks[i] & MASK_TIME) {
-            cell = new Cell<string>();
-            ret.push_back(cell);
-        }else if(masks[i] & MASK_DATE){
-            cell = new Cell<string>();
-            ret.push_back(cell);
-        }else if(masks[i] & MASK_CHAR){
-            cell = new Cell<char>();
-            ret.push_back(cell);
-        }
-    }
-
-
-    return ret;
+RowElement* CellFactory::getCell() {
+    return this->cell;
 }
 
 
