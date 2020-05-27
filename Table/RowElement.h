@@ -17,7 +17,16 @@ public:
 
 template <class T>
 class Cell: public RowElement {
+public:
     T value;
+
+    Cell(T value){
+        this->value = value;
+    }
+
+    T getValue(){
+        return value;
+    }
 };
 
 

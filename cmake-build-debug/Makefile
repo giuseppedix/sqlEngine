@@ -178,6 +178,33 @@ SqlEngine\State.cpp.s:
 	$(MAKE) -f CMakeFiles\sqlEngine.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\sqlEngine.dir\SqlEngine\State.cpp.s
 .PHONY : SqlEngine\State.cpp.s
 
+Table\CellFactory.obj: Table\CellFactory.cpp.obj
+
+.PHONY : Table\CellFactory.obj
+
+# target to build an object file
+Table\CellFactory.cpp.obj:
+	$(MAKE) -f CMakeFiles\sqlEngine.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj
+.PHONY : Table\CellFactory.cpp.obj
+
+Table\CellFactory.i: Table\CellFactory.cpp.i
+
+.PHONY : Table\CellFactory.i
+
+# target to preprocess a source file
+Table\CellFactory.cpp.i:
+	$(MAKE) -f CMakeFiles\sqlEngine.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.i
+.PHONY : Table\CellFactory.cpp.i
+
+Table\CellFactory.s: Table\CellFactory.cpp.s
+
+.PHONY : Table\CellFactory.s
+
+# target to generate assembly for a file
+Table\CellFactory.cpp.s:
+	$(MAKE) -f CMakeFiles\sqlEngine.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.s
+.PHONY : Table\CellFactory.cpp.s
+
 Table\Column.obj: Table\Column.cpp.obj
 
 .PHONY : Table\Column.obj
@@ -328,6 +355,9 @@ help:
 	@echo ... SqlEngine/State.obj
 	@echo ... SqlEngine/State.i
 	@echo ... SqlEngine/State.s
+	@echo ... Table/CellFactory.obj
+	@echo ... Table/CellFactory.i
+	@echo ... Table/CellFactory.s
 	@echo ... Table/Column.obj
 	@echo ... Table/Column.i
 	@echo ... Table/Column.s

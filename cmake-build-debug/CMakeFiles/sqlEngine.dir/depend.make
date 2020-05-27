@@ -18,6 +18,16 @@ CMakeFiles\sqlEngine.dir\SqlEngine\State.cpp.obj: ..\Table\RowElement.h
 CMakeFiles\sqlEngine.dir\SqlEngine\State.cpp.obj: ..\Table\Table.h
 CMakeFiles\sqlEngine.dir\SqlEngine\State.cpp.obj: ..\types.h
 
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj: ..\SqlEngine\SqlEngine.h
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj: ..\SqlEngine\State.h
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj: ..\Table\CellFactory.cpp
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj: ..\Table\CellFactory.h
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj: ..\Table\Column.h
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj: ..\Table\Row.h
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj: ..\Table\RowElement.h
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj: ..\Table\Table.h
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj: ..\types.h
+
 CMakeFiles\sqlEngine.dir\Table\Column.cpp.obj: ..\Table\Column.cpp
 CMakeFiles\sqlEngine.dir\Table\Column.cpp.obj: ..\Table\Column.h
 CMakeFiles\sqlEngine.dir\Table\Column.cpp.obj: ..\types.h
@@ -33,6 +43,7 @@ CMakeFiles\sqlEngine.dir\Table\RowElement.cpp.obj: ..\types.h
 
 CMakeFiles\sqlEngine.dir\Table\Table.cpp.obj: ..\SqlEngine\SqlEngine.h
 CMakeFiles\sqlEngine.dir\Table\Table.cpp.obj: ..\SqlEngine\State.h
+CMakeFiles\sqlEngine.dir\Table\Table.cpp.obj: ..\Table\CellFactory.h
 CMakeFiles\sqlEngine.dir\Table\Table.cpp.obj: ..\Table\Column.h
 CMakeFiles\sqlEngine.dir\Table\Table.cpp.obj: ..\Table\Row.h
 CMakeFiles\sqlEngine.dir\Table\Table.cpp.obj: ..\Table\RowElement.h

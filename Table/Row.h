@@ -7,6 +7,13 @@
 using namespace std;
 
 class Row {
+public:
+
+    void setRow(vector<RowElement*> row){
+        this->row = row;
+    }
+
+private:
     vector<RowElement*> row;
 };
 

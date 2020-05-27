@@ -18,6 +18,16 @@ CMakeFiles/sqlEngine.dir/SqlEngine/State.cpp.obj
  D:/SqlEngine/sqlEngine/Table/RowElement.h
  D:/SqlEngine/sqlEngine/Table/Table.h
  D:/SqlEngine/sqlEngine/types.h
+CMakeFiles/sqlEngine.dir/Table/CellFactory.cpp.obj
+ D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
+ D:/SqlEngine/sqlEngine/SqlEngine/State.h
+ D:/SqlEngine/sqlEngine/Table/CellFactory.cpp
+ D:/SqlEngine/sqlEngine/Table/CellFactory.h
+ D:/SqlEngine/sqlEngine/Table/Column.h
+ D:/SqlEngine/sqlEngine/Table/Row.h
+ D:/SqlEngine/sqlEngine/Table/RowElement.h
+ D:/SqlEngine/sqlEngine/Table/Table.h
+ D:/SqlEngine/sqlEngine/types.h
 CMakeFiles/sqlEngine.dir/Table/Column.cpp.obj
  D:/SqlEngine/sqlEngine/Table/Column.cpp
  D:/SqlEngine/sqlEngine/Table/Column.h
@@ -34,6 +44,7 @@ CMakeFiles/sqlEngine.dir/Table/RowElement.cpp.obj
 CMakeFiles/sqlEngine.dir/Table/Table.cpp.obj
  D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
  D:/SqlEngine/sqlEngine/SqlEngine/State.h
+ D:/SqlEngine/sqlEngine/Table/CellFactory.h
  D:/SqlEngine/sqlEngine/Table/Column.h
  D:/SqlEngine/sqlEngine/Table/Row.h
  D:/SqlEngine/sqlEngine/Table/RowElement.h

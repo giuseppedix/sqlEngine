@@ -26,9 +26,37 @@ D:/SqlEngine/sqlEngine/SqlEngine/State.h
 bitset
 -
 
+D:/SqlEngine/sqlEngine/SqlEngine/State.cpp
+State.h
+D:/SqlEngine/sqlEngine/SqlEngine/State.h
+
 D:/SqlEngine/sqlEngine/SqlEngine/State.h
 ../Table/Table.h
 D:/SqlEngine/sqlEngine/Table/Table.h
+
+D:/SqlEngine/sqlEngine/Table/CellFactory.cpp
+CellFactory.h
+D:/SqlEngine/sqlEngine/Table/CellFactory.h
+RowElement.h
+D:/SqlEngine/sqlEngine/Table/RowElement.h
+../SqlEngine/SqlEngine.h
+D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
+
+D:/SqlEngine/sqlEngine/Table/CellFactory.h
+vector
+-
+string
+-
+RowElement.h
+D:/SqlEngine/sqlEngine/Table/RowElement.h
+Column.h
+D:/SqlEngine/sqlEngine/Table/Column.h
+Table.h
+D:/SqlEngine/sqlEngine/Table/Table.h
+
+D:/SqlEngine/sqlEngine/Table/Column.cpp
+Column.h
+D:/SqlEngine/sqlEngine/Table/Column.h
 
 D:/SqlEngine/sqlEngine/Table/Column.h
 vector
@@ -38,11 +66,19 @@ iostream
 ../types.h
 D:/SqlEngine/sqlEngine/types.h
 
+D:/SqlEngine/sqlEngine/Table/Row.cpp
+Row.h
+D:/SqlEngine/sqlEngine/Table/Row.h
+
 D:/SqlEngine/sqlEngine/Table/Row.h
 iostream
 -
 vector
 -
+RowElement.h
+D:/SqlEngine/sqlEngine/Table/RowElement.h
+
+D:/SqlEngine/sqlEngine/Table/RowElement.cpp
 RowElement.h
 D:/SqlEngine/sqlEngine/Table/RowElement.h
 
@@ -53,6 +89,14 @@ vector
 -
 ../types.h
 D:/SqlEngine/sqlEngine/types.h
+
+D:/SqlEngine/sqlEngine/Table/Table.cpp
+Table.h
+D:/SqlEngine/sqlEngine/Table/Table.h
+../SqlEngine/SqlEngine.h
+D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
+CellFactory.h
+D:/SqlEngine/sqlEngine/Table/CellFactory.h
 
 D:/SqlEngine/sqlEngine/Table/Table.h
 vector
@@ -65,6 +109,12 @@ Column.h
 D:/SqlEngine/sqlEngine/Table/Column.h
 regex
 -
+
+D:/SqlEngine/sqlEngine/main.cpp
+iostream
+-
+SqlEngine/SqlEngine.h
+D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
 
 D:/SqlEngine/sqlEngine/types.h
 

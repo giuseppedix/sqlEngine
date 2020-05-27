@@ -96,6 +96,12 @@
 		<Unit filename="D:/SqlEngine/sqlEngine/SqlEngine/State.h">
 			<Option target="sqlEngine"/>
 		</Unit>
+		<Unit filename="D:/SqlEngine/sqlEngine/Table/CellFactory.cpp">
+			<Option target="sqlEngine"/>
+		</Unit>
+		<Unit filename="D:/SqlEngine/sqlEngine/Table/CellFactory.h">
+			<Option target="sqlEngine"/>
+		</Unit>
 		<Unit filename="D:/SqlEngine/sqlEngine/Table/Column.cpp">
 			<Option target="sqlEngine"/>
 		</Unit>

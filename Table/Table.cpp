@@ -1,10 +1,11 @@
 #include "Table.h"
 #include "../SqlEngine/SqlEngine.h"
+#include "CellFactory.h"
 
 int Table::addRow(vector<string> fields, vector<string> values) {
 
     bool found = true;
-    vector<int> masks;
+    vector<int> masks = getMasks(fields);
     try {
         if (fields.size() < getnumberNotNull()) {
             throw invalid_argument("ERROR: Not null fields not respect");
@@ -26,6 +27,19 @@ int Table::addRow(vector<string> fields, vector<string> values) {
                 throw invalid_argument("ERROR: Invalid fields");
             }
         }
+
+        vector <RowElement*> row;
+        for (int i = 0; i < cols.size(); i++){
+            CellFactory cellFactory(masks[i], values[i]);
+            row.push_back(cellFactory.getCell());
+        }
+        Row rT;
+        rT.setRow(row);
+        checkRow(row);
+
+        rows.push_back(rT);
+                                                                // indirizzi di memoria allocati in base alla mask
+        cout << "test" << endl;
     }
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;
@@ -129,4 +143,31 @@ bool Table::checkMasks(vector<int> masks, vector<string> values) {
         check = false;
     }
     return check;
+}
+
+void Table::checkRow(vector<RowElement *> row) {
+    for (int i = 0; i < cols.size(); i++){
+        switch (cols[i].getMask()) {
+            case MASK_INT:{
+                int vali = ((Cell<int>*) row[i])->getValue();
+                cout << "INT VALUE: " << vali << endl;
+                break;
+            }
+            case MASK_FLOAT:{
+                float valf = ((Cell<float>*) row[i])->getValue();
+                cout << "FLOAT VALUE: " << valf << endl;
+                break;
+            }
+            case MASK_TEXT:{
+                string vals = ((Cell<string>*) row[i])->getValue();
+                cout << "FLOAT VALUE: " << vals << endl;
+                break;
+            }
+            case MASK_TIME:
+            case MASK_CHAR:
+            case MASK_DATE:
+            default:
+                break;
+        }
+    }
 }

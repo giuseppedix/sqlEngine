@@ -172,9 +172,28 @@ CMakeFiles\sqlEngine.dir\SqlEngine\State.cpp.s: cmake_force
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\sqlEngine.dir\SqlEngine\State.cpp.s /c D:\SqlEngine\sqlEngine\SqlEngine\State.cpp
 <<
 
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj: CMakeFiles\sqlEngine.dir\flags.make
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj: ..\Table\CellFactory.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\SqlEngine\sqlEngine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/sqlEngine.dir/Table/CellFactory.cpp.obj"
+	C:\PROGRA~2\MICROS~2\2019\PROFES~1\VC\Tools\MSVC\1424~1.283\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj /FdCMakeFiles\sqlEngine.dir\ /FS -c D:\SqlEngine\sqlEngine\Table\CellFactory.cpp
+<<
+
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sqlEngine.dir/Table/CellFactory.cpp.i"
+	C:\PROGRA~2\MICROS~2\2019\PROFES~1\VC\Tools\MSVC\1424~1.283\bin\Hostx86\x86\cl.exe > CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\SqlEngine\sqlEngine\Table\CellFactory.cpp
+<<
+
+CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sqlEngine.dir/Table/CellFactory.cpp.s"
+	C:\PROGRA~2\MICROS~2\2019\PROFES~1\VC\Tools\MSVC\1424~1.283\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.s /c D:\SqlEngine\sqlEngine\Table\CellFactory.cpp
+<<
+
 CMakeFiles\sqlEngine.dir\Table\Column.cpp.obj: CMakeFiles\sqlEngine.dir\flags.make
 CMakeFiles\sqlEngine.dir\Table\Column.cpp.obj: ..\Table\Column.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\SqlEngine\sqlEngine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/sqlEngine.dir/Table/Column.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\SqlEngine\sqlEngine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/sqlEngine.dir/Table/Column.cpp.obj"
 	C:\PROGRA~2\MICROS~2\2019\PROFES~1\VC\Tools\MSVC\1424~1.283\bin\Hostx86\x86\cl.exe @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\sqlEngine.dir\Table\Column.cpp.obj /FdCMakeFiles\sqlEngine.dir\ /FS -c D:\SqlEngine\sqlEngine\Table\Column.cpp
 <<
@@ -199,6 +218,7 @@ sqlEngine_OBJECTS = \
 "CMakeFiles\sqlEngine.dir\Table\RowElement.cpp.obj" \
 "CMakeFiles\sqlEngine.dir\Table\Row.cpp.obj" \
 "CMakeFiles\sqlEngine.dir\SqlEngine\State.cpp.obj" \
+"CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj" \
 "CMakeFiles\sqlEngine.dir\Table\Column.cpp.obj"
 
 # External object files for target sqlEngine
@@ -210,10 +230,11 @@ sqlEngine.exe: CMakeFiles\sqlEngine.dir\Table\Table.cpp.obj
 sqlEngine.exe: CMakeFiles\sqlEngine.dir\Table\RowElement.cpp.obj
 sqlEngine.exe: CMakeFiles\sqlEngine.dir\Table\Row.cpp.obj
 sqlEngine.exe: CMakeFiles\sqlEngine.dir\SqlEngine\State.cpp.obj
+sqlEngine.exe: CMakeFiles\sqlEngine.dir\Table\CellFactory.cpp.obj
 sqlEngine.exe: CMakeFiles\sqlEngine.dir\Table\Column.cpp.obj
 sqlEngine.exe: CMakeFiles\sqlEngine.dir\build.make
 sqlEngine.exe: CMakeFiles\sqlEngine.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\SqlEngine\sqlEngine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable sqlEngine.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\SqlEngine\sqlEngine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable sqlEngine.exe"
 	"C:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\sqlEngine.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~2\2019\PROFES~1\VC\Tools\MSVC\1424~1.283\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\sqlEngine.dir\objects1.rsp @<<
  /out:sqlEngine.exe /implib:sqlEngine.lib /pdb:D:\SqlEngine\sqlEngine\cmake-build-debug\sqlEngine.pdb /version:0.0  /machine:X86 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<
