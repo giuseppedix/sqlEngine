@@ -13,12 +13,18 @@ public:
     Type type;
     bool isNotNull;
     bool isAutoIncrement;
+    void addElements(vector<string> values);
+
+
+
 };
 
 template <class T>
 class Cell: public RowElement {
     T value;
 };
+
+
 
 
 #endif //SQLENGINE_ROWELEMENT_H

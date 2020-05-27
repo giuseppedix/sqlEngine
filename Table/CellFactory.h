@@ -18,7 +18,8 @@ public:
     // CONSTRUCTOR
     CellFactory();
     vector<RowElement*> getCell(vector<int> masks);
-    vector<string> addElements(vector<string> values);
+
+
 
 
 

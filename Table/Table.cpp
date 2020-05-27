@@ -1,6 +1,7 @@
 #include "Table.h"
 #include "../SqlEngine/SqlEngine.h"
 #include "CellFactory.h"
+#include <algorithm>
 
 int Table::addRow(vector<string> fields, vector<string> values) {
 
@@ -19,7 +20,7 @@ int Table::addRow(vector<string> fields, vector<string> values) {
         if (!checkMasks(getMasks(fields), values)) {
             throw invalid_argument("ERROR: Incorrect types");
         }
-        if(getNotNullCols().size() != getnumberNotNull()){
+        if (getNotNullCols().size() != getnumberNotNull()) {
             throw invalid_argument("ERROR: Something gone wrong");
         }
         for (int i = 0; i < fields.size(); i++) {
@@ -28,16 +29,12 @@ int Table::addRow(vector<string> fields, vector<string> values) {
             }
         }
         CellFactory cellFactory;
-        vector <RowElement*> row = cellFactory.getCell(masks); // il vector contiene tutti gli
-                                                                // indirizzi di memoria allocati in base alla mask
+        vector<RowElement *> row = cellFactory.getCell(masks);
 
+        if (!checkFieldsColsOrder(fields, cols)) {
+            orderFieldsCols(fields, cols);
+        }
 
-
-
-        //cella per ogni field
-        //quindi popolare vector row
-        // ordinare i campi in base alle columns
-        //row.addElements(values)
     }
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;
@@ -141,4 +138,34 @@ bool Table::checkMasks(vector<int> masks, vector<string> values) {
         check = false;
     }
     return check;
+}
+
+bool Table::checkFieldsColsOrder(vector<string> fields, vector<Column> cols) {
+    bool check = true;
+    for (int a = 0; a < cols.size() && a < fields.size(); a++) {
+        if (fields[a] != cols[a].getName()) {
+            check = false;
+            break;
+        }
+    }
+    return check;
+}
+
+void Table::orderFieldsCols(vector<string> fields, vector<Column> cols) {
+
+    int pos = 0;
+    int j = 0;
+    int i = 0;
+
+    while (cols[i].getName() != fields[j] && i < cols.size() - 1) {
+        while (cols[i].getName() != fields[j] && j < fields.size() - 1) {
+            j++;
+            if (cols[i].getName() == fields[j]) {
+                pos = i;
+                swap(fields[j], fields[pos]);
+            }
+        }
+        i++;
+        j = 0;
+    }
 }

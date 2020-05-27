@@ -8,6 +8,7 @@ using namespace std;
 
 class Row {
     vector<RowElement*> row;
+
 };
 
 

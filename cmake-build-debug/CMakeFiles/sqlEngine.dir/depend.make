@@ -37,6 +37,7 @@ CMakeFiles/sqlEngine.dir/Table/Row.cpp.o: ../Table/Row.h
 CMakeFiles/sqlEngine.dir/Table/Row.cpp.o: ../Table/RowElement.h
 CMakeFiles/sqlEngine.dir/Table/Row.cpp.o: ../types.h
 
+CMakeFiles/sqlEngine.dir/Table/RowElement.cpp.o: ../Table/Row.h
 CMakeFiles/sqlEngine.dir/Table/RowElement.cpp.o: ../Table/RowElement.cpp
 CMakeFiles/sqlEngine.dir/Table/RowElement.cpp.o: ../Table/RowElement.h
 CMakeFiles/sqlEngine.dir/Table/RowElement.cpp.o: ../types.h
