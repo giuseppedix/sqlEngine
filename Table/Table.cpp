@@ -31,7 +31,6 @@ int Table::addRow(vector<string> fields, vector<string> values) {
         vector <RowElement*> row;
         for (int i = 0; i < cols.size(); i++){
             CellFactory cellFactory(masks[i], values[i]);
-            //RowElement* cell = cellFactory.getCell();
             row.push_back(cellFactory.getCell());
         }
         Row rT;
