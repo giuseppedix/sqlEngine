@@ -10,18 +10,23 @@
 //        cell = new Cell<tipo>()
 
 CellFactory::CellFactory(int mask, string value) {
-    if(mask & MASK_INT){
-        cell = new Cell<int>(stoi(value));
-    }else if(mask & MASK_FLOAT){
-        cell = new Cell<float>(stof(value));
-    }else if(mask & MASK_TEXT) {
-        cell = new Cell<string>(value);
-    } else if(mask & MASK_TIME) {
-        //cell = new Cell<string>();
-    }else if(mask & MASK_DATE){
-        //cell = new Cell<string>();
-    }else if(mask & MASK_CHAR){
-        cell = new Cell<char>((char) value.c_str());
+    switch (mask) {
+        case MASK_INT:
+            cell = new Cell<int>(stoi(value));
+            break;
+        case MASK_FLOAT:
+            cell = new Cell<float>(stof(value));
+            break;
+        case MASK_TEXT:
+            cell = new Cell<string>(value);
+            break;
+        case MASK_CHAR:
+            cell = new Cell<char>((char) value.c_str());
+            break;
+        case MASK_TIME:
+        case MASK_DATE:
+        default:
+            break;
     }
 }
 
