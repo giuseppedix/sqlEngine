@@ -60,6 +60,9 @@ private:
     int getTypeFromValue(string value);
 
     void checkRow(vector<RowElement *> row);
+    bool checkFieldsColsOrder (vector<string> fields, vector<Column> cols);
+    void orderFieldsCols(vector<string> fields, vector<Column> cols);
+
 };
 
 

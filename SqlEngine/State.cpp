@@ -51,6 +51,7 @@ bool State::tablePresent(string nametable, int &index) {
 void State::setParamsTable(string nameTable, vector<string> fields, vector<string> values) {
     int index;
     try {
+
         if (tablePresent(nameTable, index)) {
             tables[index].addRow(fields, values);
         } else {

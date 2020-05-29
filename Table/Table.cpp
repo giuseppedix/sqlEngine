@@ -1,6 +1,7 @@
 #include "Table.h"
 #include "../SqlEngine/SqlEngine.h"
 #include "CellFactory.h"
+#include <algorithm>
 
 int Table::addRow(vector<string> fields, vector<string> values) {
 
@@ -8,7 +9,7 @@ int Table::addRow(vector<string> fields, vector<string> values) {
     vector<int> masks = getMasks(fields);
     try {
         if (fields.size() < getnumberNotNull()) {
-            throw invalid_argument("ERROR: Not null fields not respect");
+            throw invalid_argument("ERROR: Not null fields not respect"); //Else if?
         }
         if (fields.size() != values.size()) {
             throw invalid_argument("ERROR: Something is missing");
@@ -19,7 +20,7 @@ int Table::addRow(vector<string> fields, vector<string> values) {
         if (!checkMasks(getMasks(fields), values)) {
             throw invalid_argument("ERROR: Incorrect types");
         }
-        if(getNotNullCols().size() != getnumberNotNull()){
+        if (getNotNullCols().size() != getnumberNotNull()) {
             throw invalid_argument("ERROR: Something gone wrong");
         }
         for (int i = 0; i < fields.size(); i++) {
@@ -27,7 +28,6 @@ int Table::addRow(vector<string> fields, vector<string> values) {
                 throw invalid_argument("ERROR: Invalid fields");
             }
         }
-
         vector <RowElement*> row;
         for (int i = 0; i < cols.size(); i++){
             CellFactory cellFactory(masks[i], values[i]);
@@ -40,6 +40,11 @@ int Table::addRow(vector<string> fields, vector<string> values) {
         rows.push_back(rT);
                                                                 // indirizzi di memoria allocati in base alla mask
         cout << "test" << endl;
+
+        if (!checkFieldsColsOrder(fields, cols)) {
+            orderFieldsCols(fields, cols);
+        }
+
     }
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;
@@ -160,7 +165,7 @@ void Table::checkRow(vector<RowElement *> row) {
             }
             case MASK_TEXT:{
                 string vals = ((Cell<string>*) row[i])->getValue();
-                cout << "FLOAT VALUE: " << vals << endl;
+                cout << "TEXT VALUE: " << vals << endl;
                 break;
             }
             case MASK_TIME:
@@ -169,5 +174,34 @@ void Table::checkRow(vector<RowElement *> row) {
             default:
                 break;
         }
+    }
+}
+bool Table::checkFieldsColsOrder(vector<string> fields, vector<Column> cols) {
+    bool check = true;
+    for (int a = 0; a < cols.size() && a < fields.size(); a++) {
+        if (fields[a] != cols[a].getName()) {
+            check = false;
+            break;
+        }
+    }
+    return check;
+}
+
+void Table::orderFieldsCols(vector<string> fields, vector<Column> cols) {
+
+    int pos = 0;
+    int j = 0;
+    int i = 0;
+
+    while (cols[i].getName() != fields[j] && i < cols.size() - 1) {
+        while (cols[i].getName() != fields[j] && j < fields.size() - 1) {
+            j++;
+            if (cols[i].getName() == fields[j]) {
+                pos = i;
+                swap(fields[j], fields[pos]);
+            }
+        }
+        i++;
+        j = 0;
     }
 }

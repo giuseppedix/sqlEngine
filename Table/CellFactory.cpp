@@ -21,7 +21,7 @@ CellFactory::CellFactory(int mask, string value) {
             cell = new Cell<string>(value);
             break;
         case MASK_CHAR:
-            cell = new Cell<char>((char) value.c_str());
+            cell = new Cell<char>((char) value.at(0));
             break;
         case MASK_TIME:
         case MASK_DATE:

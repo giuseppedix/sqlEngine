@@ -13,6 +13,10 @@ public:
     Type type;
     bool isNotNull;
     bool isAutoIncrement;
+    void addElements(vector<string> values);
+
+
+
 };
 
 template <class T>
@@ -28,6 +32,8 @@ public:
         return value;
     }
 };
+
+
 
 
 #endif //SQLENGINE_ROWELEMENT_H
