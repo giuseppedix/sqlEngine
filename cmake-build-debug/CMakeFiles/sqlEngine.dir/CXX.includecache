@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.cpp
+SqlEngine.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
+
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
 iostream
 -
@@ -22,9 +26,21 @@ State.h
 bitset
 -
 
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.cpp
+State.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
+
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
 ../Table/Table.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
+
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.cpp
+CellFactory.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.h
+RowElement.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
+../SqlEngine/SqlEngine.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
 
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.h
 vector
@@ -38,6 +54,10 @@ Column.h
 Table.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
 
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.cpp
+Column.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.h
+
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.h
 vector
 -
@@ -46,6 +66,12 @@ iostream
 ../types.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
 
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Row.cpp
+Row.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Row.h
+RowElement.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
+
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Row.h
 iostream
 -
@@ -53,6 +79,12 @@ vector
 -
 RowElement.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
+
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.cpp
+RowElement.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
+Row.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Row.h
 
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
 iostream
@@ -83,6 +115,12 @@ Column.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.h
 regex
 -
+
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/main.cpp
+iostream
+-
+SqlEngine/SqlEngine.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
 
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
 

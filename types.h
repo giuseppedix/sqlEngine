@@ -1,5 +1,3 @@
-
-
 #ifndef SQLENGINE_TYPES_H
 #define SQLENGINE_TYPES_H
 enum Type{
