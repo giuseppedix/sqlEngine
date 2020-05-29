@@ -78,6 +78,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Date.cpp">
+			<Option target="sqlEngine"/>
+		</Unit>
+		<Unit filename="/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Date.h">
+			<Option target="sqlEngine"/>
+		</Unit>
 		<Unit filename="/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.cpp">
 			<Option target="sqlEngine"/>
 		</Unit>
@@ -88,6 +94,12 @@
 			<Option target="sqlEngine"/>
 		</Unit>
 		<Unit filename="/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h">
+			<Option target="sqlEngine"/>
+		</Unit>
+		<Unit filename="/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Time.cpp">
+			<Option target="sqlEngine"/>
+		</Unit>
+		<Unit filename="/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Time.h">
 			<Option target="sqlEngine"/>
 		</Unit>
 		<Unit filename="/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.cpp">

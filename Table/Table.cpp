@@ -9,7 +9,7 @@ int Table::addRow(vector<string> fields, vector<string> values) {
     vector<int> masks = getMasks(fields);
     try {
         if (fields.size() < getnumberNotNull()) {
-            throw invalid_argument("ERROR: Not null fields not respect");
+            throw invalid_argument("ERROR: Not null fields not respect"); //Else if?
         }
         if (fields.size() != values.size()) {
             throw invalid_argument("ERROR: Something is missing");

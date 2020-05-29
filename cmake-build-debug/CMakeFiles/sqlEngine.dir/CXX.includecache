@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Date.cpp
+Date.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Date.h
+
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Date.h
+
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
 iostream
 -
@@ -25,6 +31,20 @@ bitset
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
 ../Table/Table.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
+
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Time.cpp
+Time.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Time.h
+
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Time.h
+
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.cpp
+CellFactory.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.h
+RowElement.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
+../SqlEngine/SqlEngine.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
 
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.h
 vector

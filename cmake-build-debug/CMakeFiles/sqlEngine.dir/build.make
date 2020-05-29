@@ -148,9 +148,35 @@ CMakeFiles/sqlEngine.dir/Table/CellFactory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sqlEngine.dir/Table/CellFactory.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.cpp -o CMakeFiles/sqlEngine.dir/Table/CellFactory.cpp.s
 
+CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.o: CMakeFiles/sqlEngine.dir/flags.make
+CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.o: ../SqlEngine/Date.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/rossellacentonze/Desktop/Prog/sqlEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.o -c /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Date.cpp
+
+CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Date.cpp > CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.i
+
+CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Date.cpp -o CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.s
+
+CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.o: CMakeFiles/sqlEngine.dir/flags.make
+CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.o: ../SqlEngine/Time.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/rossellacentonze/Desktop/Prog/sqlEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.o -c /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Time.cpp
+
+CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Time.cpp > CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.i
+
+CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/Time.cpp -o CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.s
+
 CMakeFiles/sqlEngine.dir/Table/Column.cpp.o: CMakeFiles/sqlEngine.dir/flags.make
 CMakeFiles/sqlEngine.dir/Table/Column.cpp.o: ../Table/Column.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/rossellacentonze/Desktop/Prog/sqlEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/sqlEngine.dir/Table/Column.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/rossellacentonze/Desktop/Prog/sqlEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/sqlEngine.dir/Table/Column.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sqlEngine.dir/Table/Column.cpp.o -c /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Column.cpp
 
 CMakeFiles/sqlEngine.dir/Table/Column.cpp.i: cmake_force
@@ -170,6 +196,8 @@ sqlEngine_OBJECTS = \
 "CMakeFiles/sqlEngine.dir/Table/Row.cpp.o" \
 "CMakeFiles/sqlEngine.dir/SqlEngine/State.cpp.o" \
 "CMakeFiles/sqlEngine.dir/Table/CellFactory.cpp.o" \
+"CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.o" \
+"CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.o" \
 "CMakeFiles/sqlEngine.dir/Table/Column.cpp.o"
 
 # External object files for target sqlEngine
@@ -182,10 +210,12 @@ sqlEngine: CMakeFiles/sqlEngine.dir/Table/RowElement.cpp.o
 sqlEngine: CMakeFiles/sqlEngine.dir/Table/Row.cpp.o
 sqlEngine: CMakeFiles/sqlEngine.dir/SqlEngine/State.cpp.o
 sqlEngine: CMakeFiles/sqlEngine.dir/Table/CellFactory.cpp.o
+sqlEngine: CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.o
+sqlEngine: CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.o
 sqlEngine: CMakeFiles/sqlEngine.dir/Table/Column.cpp.o
 sqlEngine: CMakeFiles/sqlEngine.dir/build.make
 sqlEngine: CMakeFiles/sqlEngine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/rossellacentonze/Desktop/Prog/sqlEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable sqlEngine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/rossellacentonze/Desktop/Prog/sqlEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable sqlEngine"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sqlEngine.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

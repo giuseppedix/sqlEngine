@@ -2,13 +2,6 @@
 #include "RowElement.h"
 #include "../SqlEngine/SqlEngine.h"
 
-//getCell(TIPO) -> Cell<tipo>
-//RowElement *cell;
-//Cell cell = new Cell()
-//swith(TIPO){
-//    case(INT):
-//        cell = new Cell<tipo>()
-
 CellFactory::CellFactory() {
     cell = nullptr;
 }
@@ -44,10 +37,7 @@ vector<RowElement *> CellFactory::getCell(vector<int> masks) {
                 row.push_back(cell);
             }
         }
-
     }
-
-
 
     return row;
 }

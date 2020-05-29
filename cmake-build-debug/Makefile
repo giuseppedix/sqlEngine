@@ -123,6 +123,33 @@ sqlEngine/fast:
 	$(MAKE) -f CMakeFiles/sqlEngine.dir/build.make CMakeFiles/sqlEngine.dir/build
 .PHONY : sqlEngine/fast
 
+SqlEngine/Date.o: SqlEngine/Date.cpp.o
+
+.PHONY : SqlEngine/Date.o
+
+# target to build an object file
+SqlEngine/Date.cpp.o:
+	$(MAKE) -f CMakeFiles/sqlEngine.dir/build.make CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.o
+.PHONY : SqlEngine/Date.cpp.o
+
+SqlEngine/Date.i: SqlEngine/Date.cpp.i
+
+.PHONY : SqlEngine/Date.i
+
+# target to preprocess a source file
+SqlEngine/Date.cpp.i:
+	$(MAKE) -f CMakeFiles/sqlEngine.dir/build.make CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.i
+.PHONY : SqlEngine/Date.cpp.i
+
+SqlEngine/Date.s: SqlEngine/Date.cpp.s
+
+.PHONY : SqlEngine/Date.s
+
+# target to generate assembly for a file
+SqlEngine/Date.cpp.s:
+	$(MAKE) -f CMakeFiles/sqlEngine.dir/build.make CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.s
+.PHONY : SqlEngine/Date.cpp.s
+
 SqlEngine/SqlEngine.o: SqlEngine/SqlEngine.cpp.o
 
 .PHONY : SqlEngine/SqlEngine.o
@@ -176,6 +203,33 @@ SqlEngine/State.s: SqlEngine/State.cpp.s
 SqlEngine/State.cpp.s:
 	$(MAKE) -f CMakeFiles/sqlEngine.dir/build.make CMakeFiles/sqlEngine.dir/SqlEngine/State.cpp.s
 .PHONY : SqlEngine/State.cpp.s
+
+SqlEngine/Time.o: SqlEngine/Time.cpp.o
+
+.PHONY : SqlEngine/Time.o
+
+# target to build an object file
+SqlEngine/Time.cpp.o:
+	$(MAKE) -f CMakeFiles/sqlEngine.dir/build.make CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.o
+.PHONY : SqlEngine/Time.cpp.o
+
+SqlEngine/Time.i: SqlEngine/Time.cpp.i
+
+.PHONY : SqlEngine/Time.i
+
+# target to preprocess a source file
+SqlEngine/Time.cpp.i:
+	$(MAKE) -f CMakeFiles/sqlEngine.dir/build.make CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.i
+.PHONY : SqlEngine/Time.cpp.i
+
+SqlEngine/Time.s: SqlEngine/Time.cpp.s
+
+.PHONY : SqlEngine/Time.s
+
+# target to generate assembly for a file
+SqlEngine/Time.cpp.s:
+	$(MAKE) -f CMakeFiles/sqlEngine.dir/build.make CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.s
+.PHONY : SqlEngine/Time.cpp.s
 
 Table/CellFactory.o: Table/CellFactory.cpp.o
 
@@ -348,12 +402,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sqlEngine"
+	@echo "... SqlEngine/Date.o"
+	@echo "... SqlEngine/Date.i"
+	@echo "... SqlEngine/Date.s"
 	@echo "... SqlEngine/SqlEngine.o"
 	@echo "... SqlEngine/SqlEngine.i"
 	@echo "... SqlEngine/SqlEngine.s"
 	@echo "... SqlEngine/State.o"
 	@echo "... SqlEngine/State.i"
 	@echo "... SqlEngine/State.s"
+	@echo "... SqlEngine/Time.o"
+	@echo "... SqlEngine/Time.i"
+	@echo "... SqlEngine/Time.s"
 	@echo "... Table/CellFactory.o"
 	@echo "... Table/CellFactory.i"
 	@echo "... Table/CellFactory.s"

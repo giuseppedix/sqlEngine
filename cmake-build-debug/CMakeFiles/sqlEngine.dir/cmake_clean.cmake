@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/sqlEngine.dir/SqlEngine/Date.cpp.o"
   "CMakeFiles/sqlEngine.dir/SqlEngine/SqlEngine.cpp.o"
   "CMakeFiles/sqlEngine.dir/SqlEngine/State.cpp.o"
+  "CMakeFiles/sqlEngine.dir/SqlEngine/Time.cpp.o"
   "CMakeFiles/sqlEngine.dir/Table/CellFactory.cpp.o"
   "CMakeFiles/sqlEngine.dir/Table/Column.cpp.o"
   "CMakeFiles/sqlEngine.dir/Table/Row.cpp.o"
