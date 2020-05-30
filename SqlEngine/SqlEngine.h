@@ -42,6 +42,8 @@ class SqlEngine{
 public:
     //DEFAULT CONSTRUCTOR
     SqlEngine() = default;
+    //DESTRUCTOR
+    ~SqlEngine();
     //METHODS
     int execute(const string &command);
     int loadState(const string &dirPath);

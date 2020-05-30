@@ -1,5 +1,10 @@
 #include "SqlEngine.h"
 
+
+SqlEngine::~SqlEngine(){
+    state.saveStateOnFile();
+}
+
 int SqlEngine::execute(const string &command) {
 
     string command_down;
@@ -10,15 +15,22 @@ int SqlEngine::execute(const string &command) {
         transform(command_down.begin(), command_down.end(), command_down.begin(), ::tolower);
         switch (getCommand((command_down))) {
             case CREATE_TABLE:
-                executeCreateTable(command_down);
+                try{
+                    executeCreateTable(command_down);
+                } catch (invalid_argument &exec) {
+                    throw 0;
+                }
                 break;
             case DROP_TABLE:
                 //TODO -> executeDropTable
                 cout << "Drop la tabella";
                 break;
             case INSERT_INTO:
-                executeInsertInto(command_down);
-                cout << "insert la tabella";
+                try{
+                    executeInsertInto(command_down);
+                } catch (invalid_argument &exec) {
+                    throw 0;
+                }
                 break;
             case DELETE_FROM:
                 //TODO -> executeDeleteFrom
@@ -42,14 +54,13 @@ int SqlEngine::execute(const string &command) {
                 break;
 
             default:
-                cout << "Non hai selezionato nessun comando a dispozione" << endl;
                 throw invalid_argument("ERROR: command not valid");
         }
+        return ret;
     }
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;
     }
-    return ret;
 }
 
 Command SqlEngine::getCommand(string command) {
@@ -300,10 +311,11 @@ void SqlEngine::executeInsertInto(string command) {
         vector<string> args = splitValueByDelimiter(out_str, ")(");
         vector<string> fields = getParams(args[0]);
         vector<string> values = getParams(args[1]);
+        vector<string> valuesTxt;
         for (int b = 0; b < quoteargs.size(); b++){
-            values.push_back(quoteargs[b]);
+            valuesTxt.push_back(quoteargs[b]);
         }
-        state.setParamsTable(nameTable, fields, values);
+        state.setParamsTable(nameTable, fields, values, valuesTxt);
     }
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;

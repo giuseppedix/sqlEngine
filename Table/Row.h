@@ -12,6 +12,9 @@ public:
     void setRow(vector<RowElement*> row){
         this->row = row;
     }
+    vector<RowElement*> getRow() const{
+        return row;
+    }
 
 private:
     vector<RowElement*> row;

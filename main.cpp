@@ -18,7 +18,7 @@ int main() {
             command += command_input;
         } while (command_input.back() != ';');
 
-        if (command.find("QUIT") != string::npos) {
+        if (command.find("QUIT") != string::npos || command.find("quit") != string::npos) {
             quit = true;
         } else {
             sqlEngine.execute(command);

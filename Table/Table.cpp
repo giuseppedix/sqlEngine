@@ -3,9 +3,24 @@
 #include "CellFactory.h"
 #include <algorithm>
 
-int Table::addRow(vector<string> fields, vector<string> values) {
+int Table::addRow(vector<string> fields, vector<string> valuesI, vector<string> valuesTxt) {
+    vector<string> values;
+    int e = 0;
+    int f = 0;
+    for (int r = 0; r < cols.size(); r++){
+        if (cols[r].getMask() == MASK_TEXT){
+            values.push_back(valuesTxt[e]);
+            e++;
+        } else{
+            values.push_back(valuesI[f]);
+            f++;
+        }
+    }
 
-    bool found = true;
+    if (!checkFieldsColsOrder(fields, cols)) {
+        orderFieldsCols(fields, values, cols);
+    }
+
     vector<int> masks = getMasks(fields);
     try {
         if (fields.size() < getnumberNotNull()) {
@@ -40,10 +55,6 @@ int Table::addRow(vector<string> fields, vector<string> values) {
         rows.push_back(rT);
                                                                 // indirizzi di memoria allocati in base alla mask
         cout << "test" << endl;
-
-        if (!checkFieldsColsOrder(fields, cols)) {
-            orderFieldsCols(fields, cols);
-        }
 
     }
     catch (invalid_argument &exc) {
@@ -187,7 +198,7 @@ bool Table::checkFieldsColsOrder(vector<string> fields, vector<Column> cols) {
     return check;
 }
 
-void Table::orderFieldsCols(vector<string> fields, vector<Column> cols) {
+void Table::orderFieldsCols(vector<string> &fields, vector<string> &values, vector<Column> cols) {
 
     int pos = 0;
     int j = 0;
@@ -199,6 +210,7 @@ void Table::orderFieldsCols(vector<string> fields, vector<Column> cols) {
             if (cols[i].getName() == fields[j]) {
                 pos = i;
                 swap(fields[j], fields[pos]);
+                swap(values[j], values[pos]);
             }
         }
         i++;

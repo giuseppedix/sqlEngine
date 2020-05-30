@@ -18,7 +18,7 @@ public:
     vector<Row> rows;
     vector<Column> cols;
     //METHODS
-    int addRow (vector<string>fields, vector <string> values);
+    int addRow (vector<string>fields, vector <string> values, vector <string> valuesTxt);
     string getName(){
         return tableName;
     }
@@ -61,7 +61,7 @@ private:
 
     void checkRow(vector<RowElement *> row);
     bool checkFieldsColsOrder (vector<string> fields, vector<Column> cols);
-    void orderFieldsCols(vector<string> fields, vector<Column> cols);
+    void orderFieldsCols(vector<string> &fields, vector<string> &values, vector<Column> cols);
 
 };
 
