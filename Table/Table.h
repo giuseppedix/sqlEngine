@@ -49,6 +49,10 @@ public:
         Table::cols = cols;
     }
 
+    void printAll();
+
+    void removeAllRows();
+
 private:
     //METHODS
     bool isFieldPresent(string field);

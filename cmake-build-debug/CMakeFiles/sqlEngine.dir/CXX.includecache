@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.cpp
+SqlEngine.h
+D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
+
 D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
 iostream
 -
@@ -31,18 +35,8 @@ direct.h
 -
 fstream
 -
-
-D:/SqlEngine/sqlEngine/Table/CellFactory.h
-vector
--
 string
 -
-RowElement.h
-D:/SqlEngine/sqlEngine/Table/RowElement.h
-Column.h
-D:/SqlEngine/sqlEngine/Table/Column.h
-Table.h
-D:/SqlEngine/sqlEngine/Table/Table.h
 
 D:/SqlEngine/sqlEngine/Table/Column.h
 vector
@@ -67,16 +61,6 @@ vector
 -
 ../types.h
 D:/SqlEngine/sqlEngine/types.h
-
-D:/SqlEngine/sqlEngine/Table/Table.cpp
-Table.h
-D:/SqlEngine/sqlEngine/Table/Table.h
-../SqlEngine/SqlEngine.h
-D:/SqlEngine/sqlEngine/SqlEngine/SqlEngine.h
-CellFactory.h
-D:/SqlEngine/sqlEngine/Table/CellFactory.h
-algorithm
--
 
 D:/SqlEngine/sqlEngine/Table/Table.h
 vector

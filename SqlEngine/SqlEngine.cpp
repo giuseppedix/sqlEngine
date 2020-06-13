@@ -22,8 +22,11 @@ int SqlEngine::execute(const string &command) {
                 }
                 break;
             case DROP_TABLE:
-                //TODO -> executeDropTable
-                cout << "Drop la tabella";
+                try{
+                    executeDropTable(command_down);
+                } catch (invalid_argument &exec) {
+                    throw 0;
+                }
                 break;
             case INSERT_INTO:
                 try{
@@ -37,20 +40,22 @@ int SqlEngine::execute(const string &command) {
                 cout << "delete la tabella";
                 break;
             case TRUNCATE_TABLE:
-                //TODO -> executeTruncateTable
-                cout << "truncate la tabella";
+                try{
+                    executeTruncateTable(command_down);
+                } catch (invalid_argument &exec) {
+                    throw 0;
+                }
                 break;
             case UPDATE:
                 //TODO -> executeUpdate
                 cout << "update la tabella";
                 break;
             case SELECT:
-                //TODO -> executeSelect
-                cout << "select la tabella";
-                break;
-            case ORDER_BY:
-                //TODO -> executeOrderBy
-                cout << "order la tabella";
+                try{
+                    executeSelect(command_down);
+                } catch (invalid_argument &exec) {
+                    throw 0;
+                }
                 break;
 
             default:
@@ -105,7 +110,11 @@ State SqlEngine::getState() const {
 int SqlEngine::loadState(const string &dbName) {
     state.setDbName(dbName);
     int result = 0;
-    //TODO
+    try {
+        state.load();
+    }catch (invalid_argument &exc) {
+        cerr << exc.what() << endl;
+    }
     return result;
 }
 
@@ -320,6 +329,52 @@ void SqlEngine::executeInsertInto(string command) {
     catch (invalid_argument &exc) {
         cerr << exc.what() << endl;
     }
+}
+
+void SqlEngine::executeSelect(string cmd) {
+    string out_str = removeSpace(cmd);
+    if (out_str.find(SELECTALLFROM_D) != string::npos) {
+        string tableName;
+        tableName.assign(out_str);
+        removeSubstrs(tableName, SELECTALLFROM_D);
+        removeSubstrs(tableName, ";");
+        for (int i=0; i < state.getTables().size(); i++){
+            if (!state.getTables()[i].getName().compare(tableName)){
+                state.getTables()[i].printAll();
+                break;
+            }
+        }
+
+    }
+    //TO BE CONTINUED
+}
+
+void SqlEngine::executeDropTable(string cmd) {
+    string out_str = removeSpace(cmd);
+    string tableName;
+    tableName.assign(out_str);
+    removeSubstrs(tableName, DROP_TABLE_D);
+    removeSubstrs(tableName, ";");
+    for (int i=0; i < state.getTables().size(); i++){
+        if (!state.getTables()[i].getName().compare(tableName)){
+            state.eraseTable(i);
+            break;
+        }
+    }
+}
+
+void SqlEngine::executeTruncateTable(string cmd) {
+        string out_str = removeSpace(cmd);
+        string tableName;
+        tableName.assign(out_str);
+        removeSubstrs(tableName, TRUNCATE_TABLE_D);
+        removeSubstrs(tableName, ";");
+        for (int i=0; i < state.getTables().size(); i++){
+            if (!state.getTables()[i].getName().compare(tableName)){
+                state.truncateTable(i);
+                break;
+            }
+        }
 }
 
 

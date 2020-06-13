@@ -217,3 +217,46 @@ void Table::orderFieldsCols(vector<string> &fields, vector<string> &values, vect
         j = 0;
     }
 }
+
+void Table::printAll() {
+    cout << "-------------------------------------" << endl;
+    for (int i=0; i < cols.size(); i++){
+        cout << cols[i].getName() << "|";
+    }
+    cout << endl;
+    cout << "-------------------------------------" << endl;
+
+    for (int j = 0; j < getRows().size(); j++){
+        vector<RowElement*> rowElements = getRows()[j].getRow();
+        for (int a = 0; a < getCols().size(); a++) {
+            switch (getCols()[a].getMask()) {
+                case MASK_INT:{
+                    int vali = ((Cell<int>*) rowElements[a])->getValue();
+                    cout << vali;
+                    break;
+                }
+                case MASK_FLOAT:{
+                    float valf = ((Cell<float>*) rowElements[a])->getValue();
+                    cout << valf;
+                    break;
+                }
+                case MASK_TEXT:{
+                    string vals = ((Cell<string>*) rowElements[a])->getValue();
+                    cout << vals;
+                    break;
+                }
+                case MASK_TIME:
+                case MASK_CHAR:
+                case MASK_DATE:
+                default:
+                    break;
+            }
+            cout << "|";
+        }
+        cout << endl;
+    }
+}
+
+void Table::removeAllRows() {
+    rows.clear();
+}

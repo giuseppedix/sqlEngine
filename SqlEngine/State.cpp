@@ -1,6 +1,7 @@
 #include "State.h"
 #include "SqlEngine.h"
 
+
 using namespace std;
 
 string State::getDbName() {
@@ -52,7 +53,6 @@ bool State::tablePresent(string nametable, int &index) {
 void State::setParamsTable(string nameTable, vector<string> fields, vector<string> values, vector<string> valuesTxt) {
     int index;
     try {
-
         if (tablePresent(nameTable, index)) {
             tables[index].addRow(fields, values, valuesTxt);
         } else {
@@ -69,9 +69,11 @@ void State::saveStateOnFile(string filepath) {
     ofstream sfile;
     try{
         string _filepath = "";
+        _filepath = path + getDbName();
+        sfile.open(_filepath);
         for (int i = 0; i < tables.size(); i++){
-            _filepath = path + tables[i].getName();
-            sfile.open(_filepath);
+            sfile << BEGIN << endl;
+            sfile << tables[i].getName() << "\n";
             if (!sfile.is_open()){
                 invalid_argument("ERROR");
             }
@@ -117,12 +119,77 @@ void State::saveStateOnFile(string filepath) {
                 }
                 sfile << endl;
             }
-
-            sfile.close();
+            sfile << END << endl;
         }
+        sfile.close();
     } catch (invalid_argument &exc) {
         cerr << exc.what();
         sfile.close();
     }
 
+}
+
+void State::load(string path) {
+    ifstream file;
+    string filepath = path + "/" + getDbName();
+    string rowFile = "";
+    try{
+        file.open(filepath);
+        if (!file.is_open()){
+            throw invalid_argument("ERROR: Cannot open file");
+        }else{
+            while (getline(file, rowFile)){
+                vector<string> tmp;
+                if (!rowFile.compare(BEGIN)){
+                    while (getline(file, rowFile)){
+                        if (!rowFile.compare(END)){
+                            break;
+                        } else {
+                            tmp.push_back(rowFile);
+                        }
+                    }
+                    Table table;
+                    table.setTableName(tmp[0]);
+
+                    vector<Column> columns;
+                    vector<string> fields = SqlEngine::splitValueByDelimiter(tmp[1], ";");
+                    vector<string> masks = SqlEngine::splitValueByDelimiter(tmp[2], ";");
+                    fields.pop_back();
+                    masks.pop_back();
+                    for (int i=0; i<fields.size(); i++){
+                        Column column;
+                        column.setName(fields[i]);
+                        column.setMask(atoi(masks[i].c_str()));
+                        columns.push_back(column);
+                    }
+                    table.setCols(columns);
+                    for (int j=3; j<tmp.size();j++){
+                        vector<string> valuesI, valuesTxt;
+                        vector<string> values = SqlEngine::splitValueByDelimiter(tmp[j], ";");
+                        values.pop_back();
+                        for (int g=0; g<values.size(); g++){
+                            if (values[g].compare("") && (atoi(masks[g].c_str()) & MASK_TEXT))
+                                valuesTxt.push_back(values[g]);
+                            else
+                                valuesI.push_back(values[g]);
+
+                        }
+                        table.addRow(fields, valuesI, valuesTxt);
+                    }
+                    tables.push_back(table);
+                }
+            }
+        }
+        file.close();
+    } catch (invalid_argument &exc) {
+        cerr << exc.what();
+    }
+}
+
+void State::eraseTable(int index) {
+    tables.erase(tables.begin() + index);
+}
+
+void State::truncateTable(int index) {
+    tables[index].removeAllRows();
 }

@@ -18,6 +18,7 @@ using namespace std;
 #define TRUNCATE_TABLE_D "truncatetable"
 #define UPDATE_D "createtable"
 #define SELECT_D "select"
+#define SELECTALLFROM_D "select*from"
 #define ORDER_BY_D "orderby"
 
 
@@ -48,6 +49,9 @@ public:
     int execute(const string &command);
     int loadState(const string &dirPath);
     State getState() const;
+
+    static vector<string> splitValueByDelimiter(string basicString, const string string);
+
 private:
     // METHODS
     string removeSpace(string input);
@@ -58,11 +62,17 @@ private:
     string findNameTable(string basicString);
     vector<string> getValueInQuote(string s);
     vector<string> getParams(string basicString);
-    vector<string> splitValueByDelimiter(string basicString, const string string);
+
     void getParamInfo(const string &s, int &paramMask, string &name);
 
     //ATTRIBUTES
     State state;
+
+    void executeSelect(string cmd);
+
+    void executeDropTable(string cmd);
+
+    void executeTruncateTable(string cmd);
 };
 
 #endif
