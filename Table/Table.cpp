@@ -7,13 +7,18 @@ int Table::addRow(vector<string> fields, vector<string> valuesI, vector<string> 
     vector<string> values;
     int e = 0;
     int f = 0;
+
     for (int r = 0; r < cols.size(); r++){
-        if (cols[r].getMask() == MASK_TEXT){
-            values.push_back(valuesTxt[e]);
-            e++;
-        } else{
-            values.push_back(valuesI[f]);
-            f++;
+        for (int g = 0; g < fields.size(); g++){
+            if (!fields[g].compare(cols[r].getName())){
+                if (cols[r].getMask() == MASK_TEXT){
+                    values.push_back(valuesTxt[e]);
+                    e++;
+                } else{
+                    values.push_back(valuesI[f]);
+                    f++;
+                }
+            }
         }
     }
 
@@ -44,10 +49,23 @@ int Table::addRow(vector<string> fields, vector<string> valuesI, vector<string> 
             }
         }
         vector <RowElement*> row;
-        for (int i = 0; i < cols.size(); i++){
-            CellFactory cellFactory(masks[i], values[i]);
-            row.push_back(cellFactory.getCell());
+
+        for (int r = 0; r < cols.size(); r++){
+            int index = -1;
+            for (int g = 0; g < fields.size(); g++){
+                if (!fields[g].compare(cols[r].getName())){
+                    index = g;
+                }
+            }
+            if (index != -1){
+                CellFactory cellFactory(masks[index], values[index]);
+                row.push_back(cellFactory.getCell());
+            } else{
+                CellFactory cellFactory(cols[r].getMask(), "-999");
+                row.push_back(cellFactory.getCell());
+            }
         }
+
         Row rT;
         rT.setRow(row);
         checkRow(row);
@@ -155,7 +173,7 @@ bool Table::checkMasks(vector<int> masks, vector<string> values) {
     int f = 0;
     for (int i = 0; i < masks.size(); i++) {
         int mskTmp = getTypeFromValue(values[i]) & masks[i];
-        if (mskTmp == masks[i] || (!getTypeFromValue(values[i]) && masks[i] != MASK_NOTNULL)) {
+        if (mskTmp == masks[i] || mskTmp != MASK_NOTNULL) {
             check = true;
         } else {
             check = false;
@@ -187,7 +205,11 @@ void Table::checkRow(vector<RowElement *> row) {
                 break;
             }
             case MASK_TIME:
-            case MASK_CHAR:
+            case MASK_CHAR:{
+                char valc = ((Cell<char>*) row[i])->getValue();
+                cout << "CHAR VALUE: " << valc << endl;
+                break;
+            }
             case MASK_DATE:
             default:
                 break;
