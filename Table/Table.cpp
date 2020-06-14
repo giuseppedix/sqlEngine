@@ -124,9 +124,15 @@ int Table::getTypeFromValue(string value) {
         type = MASK_FLOAT;
         cout << "IsFloat" << endl;
 
-    } else {
+    } else if (value.length() == 1) {
+        type = MASK_CHAR;
+        cout << "IsChar" << endl;
+
+    }else if (value.length() != 0) {
         type = MASK_TEXT;
         cout << "IsString" << endl;
+    } else {
+        type = MASK_INVALID;
     }
 
     return type;
@@ -148,7 +154,8 @@ bool Table::checkMasks(vector<int> masks, vector<string> values) {
     bool check = false;
     int f = 0;
     for (int i = 0; i < masks.size(); i++) {
-        if (masks[i] == getTypeFromValue(values[i])) {
+        int mskTmp = getTypeFromValue(values[i]) & masks[i];
+        if (mskTmp == masks[i] || (!getTypeFromValue(values[i]) && masks[i] != MASK_NOTNULL)) {
             check = true;
         } else {
             check = false;
@@ -246,7 +253,12 @@ void Table::printAll() {
                     break;
                 }
                 case MASK_TIME:
-                case MASK_CHAR:
+                case MASK_CHAR:{
+                    char valc = ((Cell<char>*) rowElements[a])->getValue();
+                    cout << valc;
+                    break;
+                }
+
                 case MASK_DATE:
                 default:
                     break;

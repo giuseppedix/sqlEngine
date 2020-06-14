@@ -2,5 +2,10 @@
 ciccio11
 id;name;salary;
 1;4;2;
-23;ciccio;34.1;
+-----END;
+-----BEGIN;
+anna
+nome;cognome;età;professione;salary;hobby;lettera;
+4;4;1;4;2;4;3;
+annabel;cenoz;33;casalinga;3.4;giocare a calcio;b;
 -----END;

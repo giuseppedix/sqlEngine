@@ -317,6 +317,7 @@ void SqlEngine::executeInsertInto(string command) {
             removeSubstrs(out_str, removed);
         }
         removeSubstrs(out_str, ",\"\"");
+        removeSubstrs(out_str, "\"\",");
         vector<string> args = splitValueByDelimiter(out_str, ")(");
         vector<string> fields = getParams(args[0]);
         vector<string> values = getParams(args[1]);

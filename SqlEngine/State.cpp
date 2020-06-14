@@ -110,7 +110,11 @@ void State::saveStateOnFile(string filepath) {
                             break;
                         }
                         case MASK_TIME:
-                        case MASK_CHAR:
+                        case MASK_CHAR:{
+                            char valc = ((Cell<char>*) rowElements[a])->getValue();
+                            sfile << valc;
+                            break;
+                        }
                         case MASK_DATE:
                         default:
                             break;
