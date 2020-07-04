@@ -25,16 +25,12 @@ public:
     bool operator>(const Time & to_compare);
     bool operator<(const Time & to_compare);
     friend ostream& operator<< (ostream& stream, const Time& d);
+
 private:
+
     int hh;
     int mm;
     int ss;
-
-
-
-
-
-
 
 };
 

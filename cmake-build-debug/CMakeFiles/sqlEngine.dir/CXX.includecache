@@ -30,6 +30,14 @@ iomanip
 ctime
 -
 
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.cpp
+SqlEngine.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
+../Table/CellFactory.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.h
+string
+-
+
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
 iostream
 -
@@ -93,16 +101,6 @@ vector
 -
 ../types.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
-
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.cpp
-Table.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
-../SqlEngine/SqlEngine.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
-CellFactory.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.h
-algorithm
--
 
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
 vector

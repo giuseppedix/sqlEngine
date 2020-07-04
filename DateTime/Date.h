@@ -37,13 +37,13 @@ public:
     bool operator!=(const Date & to_compare);
     bool operator>(const Date & to_compare);
     bool operator<(const Date & to_compare);
-
     friend ostream& operator<< (ostream& stream, const Date& d);
+
 private:
     int yy;
     int mm;
     int dd;
-    //int _actual_kind;
+
 
 };
 

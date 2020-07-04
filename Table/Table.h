@@ -55,10 +55,11 @@ public:
     void printAll();
     void printAllOrdered(string mode, string col);
     void printSelect(vector<string> toPrint);
+    void printSelectOrdered(string mode, string col, vector<string> toPrint);
     void printWhere(vector<string> &toPrintWhere, vector<string>split);
+    void printWhereOrdered(vector<string> &toPrintWhere, vector<string>split, string mode, string col);
     void removeAllRows();
     void deleteFrom(string &fieldToDelete, string &valueToDelete);
-    void orderBy();
     bool isFieldPresent(string field);
     void updateRecords(string &valueToSet, string &fieldToSet, string &valueToWhere, string &fieldToWhere);
     void setValue(string &valueToSet, string &fieldToset, string &fieldToWhere, int pos);

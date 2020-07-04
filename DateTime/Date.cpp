@@ -2,7 +2,7 @@
 #include "../SqlEngine/SqlEngine.h"
 
 Date::Date() {
-    time_t t = time(0);   // get time now
+    time_t t = time(0);
     tm* now = localtime(&t);
     dd = now->tm_mday;
     mm = now->tm_mon + 1;

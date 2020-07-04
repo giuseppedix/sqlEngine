@@ -58,14 +58,6 @@ int SqlEngine::execute(const string &command) {
                     throw 0;
                 }
                 break;
-            case ORDER_BY:
-                try {
-                    //executeOrderBy(command_down);
-                }
-                catch (invalid_argument &exec) {
-                    throw 0;
-                }
-                break;
             case SELECT:
                 try {
                     executeSelect(command_down);
@@ -428,86 +420,165 @@ void SqlEngine::executeSelect(string &cmd) {
         } else {
             if (out_str.find(SELECT_D) != string::npos && out_str.find("from") != string::npos &&
                 out_str.find("where") != string::npos == 0) {
-                int l = out_str.find("from");
-                int s = out_str.find(SELECT_D);
-                if (l < s) {
-                    throw invalid_argument("ERROR: Wrong command order");
-                }
-                string tableName;
-                out_str.erase(0, l);
-                tableName.assign(out_str);
-                removeSubstrs(tableName, "from");
-                removeSubstrs(tableName, ";");
-                if (tableName == "") {
-                    throw invalid_argument("ERROR: Table Name not defined");
-                }
-                int m = removeSpace(cmd).find(tableName);
-                if (m < s || m < l) {
-                    throw invalid_argument("ERROR: Wrong command order");
-                }
-                int index;
-                if (!state.tablePresent(tableName, index)) {
-                    throw invalid_argument("ERROR: Name Table doesn't exist");
-                }
-                string str = removeSpace(cmd);
-                removeSubstrs(str, "from");
-                removeSubstrs(str, SELECT_D);
-                removeSubstrs(str, tableName);
-                removeSubstrs(str, ";");
-                vector<string> fieldsToPrint = splitValueByDelimiter(str, ",");
-                for (int b = 0; b < state.getTables().size(); b++) {
-                    if (!state.getTables()[b].getName().compare(tableName)) {
-                        vector<string> toPrint = checkFieldsToPrint(fieldsToPrint, tableName, index);
-                        state.getTables()[b].printSelect(toPrint);
-                        break;
-                    }
-                }
-            } else {
-                if (out_str.find(SELECT_D) != string::npos && out_str.find("from") != string::npos &&
-                    out_str.find("where") != string::npos) {
-                    int g = out_str.find("from");
-                    int s = out_str.find(SELECT_D);
-                    if (g < s) { // mettere tutte le condizioni
-                        throw invalid_argument("ERROR: Wrong command order");
-                    }
+                if (out_str.find(ORDER_BY_D) != string::npos) {
                     string tableName;
-                    out_str.erase(0, g);
+                    out_str.erase(0, out_str.find("from"));
                     removeSubstrs(out_str, "from");
-                    tableName = out_str.erase(out_str.find("where"), out_str.find(';') + 1);
+                    out_str.erase(out_str.find("order"), out_str.find(';'));
+                    tableName.assign(out_str);
                     if (tableName == "") {
-                        throw invalid_argument("ERROR: Table Name not defined");
+                        throw invalid_argument("ERROR: Table name not defined");
                     }
                     int index;
                     if (!state.tablePresent(tableName, index)) {
                         throw invalid_argument("ERROR: Name Table doesn't exist");
                     }
-                    vector<string> quoteargs = getValueInQuote(cmd);
-                    string str = removeSpace(cmd);
-                    string fieldWhere;
-                    fieldWhere = str.erase(0, str.find("where"));
-                    removeSubstrs(fieldWhere, "where");
-                    string st = removeSpace(cmd);
-                    removeSubstrs(st, "from");
-                    removeSubstrs(st, SELECT_D);
-                    removeSubstrs(st, tableName);
-                    removeSubstrs(st, fieldWhere);
-                    removeSubstrs(st, "where");
-                    vector<string> fieldsToPrintWhere = splitValueByDelimiter(st, ",");
-                    vector<string> split = splitWhereField(fieldWhere);
-                    split[1] = removeQuotes(split[1]);
-                    if (!checkWhereField(split, index, tableName)) {
-                        throw invalid_argument("ERROR: Invalid Where Field");
-                    }
-                    for (int l = 0; l < state.getTables().size(); l++) {
-                        if (!state.getTables()[l].getName().compare(tableName)) {
-                            vector<string> toPrintWhere = checkFieldsToPrint(fieldsToPrintWhere, tableName, index);
-                            if (!checkWhereValue(split, index, tableName)) {
-                                throw invalid_argument("ERROR: Where Value doesn't exist");
-                            }
-                            state.getTables()[l].printWhere(toPrintWhere, split);
+                    string s = removeSpace(cmd);
+                    s.erase(s.find("from"), s.find(';'));
+                    removeSubstrs(s, SELECT_D);
+                    string str;
+                    str.assign(s);
+                    vector<string> fieldsToPrint = splitValueByDelimiter(str, ",");
+                    vector<string> ret = getOrderByInfo(cmd, tableName);
+                    string mode = ret[0];
+                    string col = ret[1];
+                    for (int i = 0; i < state.getTables().size(); i++) {
+                        if (!state.getTables()[i].getName().compare(tableName)) {
+                            state.getTables()[i].printSelectOrdered(mode, col, fieldsToPrint);
                             break;
                         }
                     }
+                } else{
+                    int l = out_str.find("from");
+                    int s = out_str.find(SELECT_D);
+                    if (l < s) {
+                        throw invalid_argument("ERROR: Wrong command order");
+                    }
+                    string tableName;
+                    out_str.erase(0, l);
+                    tableName.assign(out_str);
+                    removeSubstrs(tableName, "from");
+                    removeSubstrs(tableName, ";");
+                    if (tableName == "") {
+                        throw invalid_argument("ERROR: Table Name not defined");
+                    }
+                    int m = removeSpace(cmd).find(tableName);
+                    if (m < s || m < l) {
+                        throw invalid_argument("ERROR: Wrong command order");
+                    }
+                    int index;
+                    if (!state.tablePresent(tableName, index)) {
+                        throw invalid_argument("ERROR: Name Table doesn't exist");
+                    }
+                    string str = removeSpace(cmd);
+                    removeSubstrs(str, "from");
+                    removeSubstrs(str, SELECT_D);
+                    removeSubstrs(str, tableName);
+                    removeSubstrs(str, ";");
+                    vector<string> fieldsToPrint = splitValueByDelimiter(str, ",");
+                    for (int b = 0; b < state.getTables().size(); b++) {
+                        if (!state.getTables()[b].getName().compare(tableName)) {
+                            vector<string> toPrint = checkFieldsToPrint(fieldsToPrint, tableName, index);
+                            state.getTables()[b].printSelect(toPrint);
+                            break;
+                        }
+                    }
+                }
+            } else {
+                if (out_str.find(SELECT_D) != string::npos && out_str.find("from") != string::npos &&
+                    out_str.find("where") != string::npos) {
+                    if(out_str.find(ORDER_BY_D) != string::npos){
+                        string tableName;
+                        out_str.erase(0, out_str.find("from"));
+                        removeSubstrs(out_str, "from");
+                        out_str.erase(out_str.find("where"), out_str.find(';'));
+                        tableName.assign(out_str);
+                        if (tableName == "") {
+                            throw invalid_argument("ERROR: Table name not defined");
+                        }
+                        int index;
+                        if (!state.tablePresent(tableName, index)) {
+                            throw invalid_argument("ERROR: Name Table doesn't exist");
+                        }
+                        string s = removeSpace(cmd);
+                        vector<string> quoteargs = getValueInQuote(cmd);
+                        s.erase(s.find("from"), s.find(';'));
+                        removeSubstrs(s, SELECT_D);
+                        string str;
+                        str.assign(s);
+                        vector<string> fieldsToPrintWhere = splitValueByDelimiter(str, ",");
+                        vector<string> ret = getOrderByInfo(cmd, tableName);
+                        string mode = ret[0];
+                        string col = ret[1];
+                        string fieldWhere;
+                        fieldWhere = removeSpace(cmd).erase(0, removeSpace(cmd).find("where"));
+                        removeSubstrs(fieldWhere, "where");
+                        removeSubstrs(fieldWhere, mode);
+                        removeSubstrs(fieldWhere, col);
+                        removeSubstrs(fieldWhere, ORDER_BY_D);
+                        vector<string> split = splitWhereField(fieldWhere);
+                        split[1] = removeQuotes(split[1]);
+                        if (!checkWhereField(split, index, tableName)) {
+                            throw invalid_argument("ERROR: Invalid Where Field");
+                        }
+                        for (int l = 0; l < state.getTables().size(); l++) {
+                            if (!state.getTables()[l].getName().compare(tableName)) {
+                                vector<string> toPrintWhere = checkFieldsToPrint(fieldsToPrintWhere, tableName, index);
+                                if (!checkWhereValue(split, index, tableName)) {
+                                    throw invalid_argument("ERROR: Where Value doesn't exist");
+                                }
+                                state.getTables()[l].printWhereOrdered(toPrintWhere, split, mode, col);
+                                break;
+                            }
+                        }
+
+                    } else{
+                        int g = out_str.find("from");
+                        int s = out_str.find(SELECT_D);
+                        if (g < s) { // mettere tutte le condizioni
+                            throw invalid_argument("ERROR: Wrong command order");
+                        }
+                        string tableName;
+                        out_str.erase(0, g);
+                        removeSubstrs(out_str, "from");
+                        tableName = out_str.erase(out_str.find("where"), out_str.find(';') + 1);
+                        if (tableName == "") {
+                            throw invalid_argument("ERROR: Table Name not defined");
+                        }
+                        int index;
+                        if (!state.tablePresent(tableName, index)) {
+                            throw invalid_argument("ERROR: Name Table doesn't exist");
+                        }
+                        vector<string> quoteargs = getValueInQuote(cmd);
+                        string str = removeSpace(cmd);
+                        string fieldWhere;
+                        fieldWhere = str.erase(0, str.find("where"));
+                        removeSubstrs(fieldWhere, "where");
+                        string st = removeSpace(cmd);
+                        removeSubstrs(st, "from");
+                        removeSubstrs(st, SELECT_D);
+                        removeSubstrs(st, tableName);
+                        removeSubstrs(st, fieldWhere);
+                        removeSubstrs(st, "where");
+                        vector<string> fieldsToPrintWhere = splitValueByDelimiter(st, ",");
+                        vector<string> split = splitWhereField(fieldWhere);
+                        split[1] = removeQuotes(split[1]);
+                        if (!checkWhereField(split, index, tableName)) {
+                            throw invalid_argument("ERROR: Invalid Where Field");
+                        }
+                        for (int l = 0; l < state.getTables().size(); l++) {
+                            if (!state.getTables()[l].getName().compare(tableName)) {
+                                vector<string> toPrintWhere = checkFieldsToPrint(fieldsToPrintWhere, tableName, index);
+                                if (!checkWhereValue(split, index, tableName)) {
+                                    throw invalid_argument("ERROR: Where Value doesn't exist");
+                                }
+                                state.getTables()[l].printWhere(toPrintWhere, split);
+                                break;
+                            }
+                        }
+
+                    }
+
                 }
             }
         }
@@ -660,7 +731,14 @@ bool SqlEngine::checkWhereValue(vector<string> split, int index, string tableNam
                             }
                             break;
                         }
-                        case MASK_TIME:
+                        case MASK_TIME:{
+                            Time time = ((Cell<Time> *) rowElements[a])->getValue();
+                            if(time == split[1]){
+                                check = true;
+                            }
+                            break;
+
+                        }
                         case MASK_CHAR: {
                             char valc = ((Cell<char> *) rowElements[a])->getValue();
                             if ((char) split[1].at(0) == valc) {
@@ -668,7 +746,14 @@ bool SqlEngine::checkWhereValue(vector<string> split, int index, string tableNam
                             }
                             break;
                         }
-                        case MASK_DATE:
+                        case MASK_DATE:{
+                            Date date = ((Cell<Date> *) rowElements[a])->getValue();
+                            if(date == split[1]){
+                                check = true;
+                            }
+                            break;
+
+                        }
                         default:
                             break;
                     }
@@ -903,8 +988,6 @@ vector<string> SqlEngine::getOrderByInfo(string command, string tableName) {
     }
     return ret;
 }
-
-
 
 bool SqlEngine::checkColisNotKeyWord(vector<string> paramsNames) {
 

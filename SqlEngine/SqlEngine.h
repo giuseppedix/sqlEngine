@@ -57,7 +57,6 @@ private:
     string removeSpace(string input);
     string removeQuotes(string str);
     Command getCommand(string command_input);
-
     void executeCreateTable(string basicString);
     vector<string> getOrderByInfo(string command, string tableName);
     void executeInsertInto(string command);

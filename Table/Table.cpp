@@ -51,16 +51,16 @@ int Table::addRow(vector<string> fields, vector<string> values) {
                 }
             }
             if (index != -1) {
-                if ((masks[index] & MASK_AUTOINCREMENT)  && (masks[index] & MASK_INT)) {
-                    if (rows.size()){
+                if ((masks[index] & MASK_AUTOINCREMENT) && (masks[index] & MASK_INT)) {
+                    if (rows.size()) {
                         vector<RowElement *> rowTmps = rows[rows.size() - 1].getRow();
                         count = ((Cell<int> *) rowTmps[r])->getValue();
-                        count ++;
+                        count++;
                     }
                     values[index] = to_string(count);
                 }
-                if (masks[index] & MASK_PRIMARYKEY){
-                    if (checkDuplicate(r, masks[index], values[index])){
+                if (masks[index] & MASK_PRIMARYKEY) {
+                    if (checkDuplicate(r, masks[index], values[index])) {
                         throw invalid_argument("ERROR: Duplicate found. Primary key cannot be duplicated");
                     }
                 }
@@ -69,15 +69,15 @@ int Table::addRow(vector<string> fields, vector<string> values) {
             } else {
                 string value = "-999";
 
-                if ((cols[r].getMask() & MASK_PRIMARYKEY) && !(cols[r].getMask() & MASK_AUTOINCREMENT)){
+                if ((cols[r].getMask() & MASK_PRIMARYKEY) && !(cols[r].getMask() & MASK_AUTOINCREMENT)) {
                     throw invalid_argument("ERROR: Primary key cannot be null");
                 }
 
                 if ((cols[r].getMask() & MASK_AUTOINCREMENT) && (cols[r].getMask() & MASK_INT)) {
-                    if (rows.size()){
+                    if (rows.size()) {
                         vector<RowElement *> rowTmps = rows[rows.size() - 1].getRow();
                         count = ((Cell<int> *) rowTmps[r])->getValue();
-                        count ++;
+                        count++;
                     }
                     value = to_string(count);
                 }
@@ -304,7 +304,7 @@ void Table::printAll() {
                     cout << vals;
                     break;
                 }
-                case MASK_TIME:{
+                case MASK_TIME: {
                     Time time = ((Cell<Time> *) rowElements[a])->getValue();
                     cout << time;
                     break;
@@ -315,7 +315,7 @@ void Table::printAll() {
                     break;
                 }
 
-                case MASK_DATE:{
+                case MASK_DATE: {
                     Date date = ((Cell<Date> *) rowElements[a])->getValue();
                     cout << date;
                     break;
@@ -606,7 +606,14 @@ void Table::deleteFrom(string &fieldToDelete, string &valueToDelete) {
                         }
                         break;
                     }
-                    case MASK_TIME:
+                    case MASK_TIME:{
+                        Time time = ((Cell<Time> *) rowElements[a])->getValue();
+                        if(time == valueToDelete){
+                            rows.erase(rows.begin() + j);
+                        }
+                        break;
+
+                    }
                     case MASK_CHAR: {
                         char valc = ((Cell<char> *) rowElements[a])->getValue();
                         if (valc == valueToDelete.at(0)) {
@@ -614,7 +621,14 @@ void Table::deleteFrom(string &fieldToDelete, string &valueToDelete) {
                         }
                         break;
                     }
-                    case MASK_DATE:
+                    case MASK_DATE:{
+                        Date date = ((Cell<Date> *) rowElements[a])->getValue();
+                        if(date == valueToDelete){
+                            rows.erase(rows.begin() + j);
+                        }
+                        break;
+
+                    }
                     default:
                         break;
                 }
@@ -681,7 +695,15 @@ void Table::updateRecords(string &valueToSet, string &fieldToSet, string &valueT
                         }
                         break;
                     }
-                    case MASK_TIME:
+                    case MASK_TIME:{
+                        Time time = ((Cell<Time> *) rowElements[a])->getValue();
+                        if(time == valueToWhere){
+                            int pos = 0;
+                            pos = j;
+                            setValue(valueToSet, fieldToSet, fieldToWhere, pos);
+                        }
+                        break;
+                    }
                     case MASK_CHAR: {
                         char valc = ((Cell<char> *) rowElements[a])->getValue();
                         if (valueToWhere.at((0) == valc)) {
@@ -691,7 +713,15 @@ void Table::updateRecords(string &valueToSet, string &fieldToSet, string &valueT
                         }
                         break;
                     }
-                    case MASK_DATE:
+                    case MASK_DATE:{
+                        Date date = ((Cell<Date> *) rowElements[a])->getValue();
+                        if(date == valueToWhere){
+                            int pos = 0;
+                            pos = j;
+                            setValue(valueToSet, fieldToSet, fieldToWhere, pos);
+                        }
+                        break;
+                    }
                     default:
                         break;
                 }
@@ -728,7 +758,14 @@ void Table::setValue(string &valueToSet, string &fieldToset, string &fieldToWher
                         ((Cell<string> *) rowElements[a])->setValue(valueToSet);
                         break;
                     }
-                    case MASK_TIME:
+                    case MASK_TIME:{
+                        if (getTypeFromValue(valueToSet) != MASK_TIME) {
+                            throw invalid_argument("ERROR: Set Value doesn't respect Type");
+                        }
+                        ((Cell<Time> *) rowElements[a])->setValue(valueToSet);
+                        break;
+
+                    }
                     case MASK_CHAR: {
                         if (getTypeFromValue(valueToSet) != MASK_CHAR) {
                             throw invalid_argument("ERROR: Set Value doesn't respect Type");
@@ -736,7 +773,14 @@ void Table::setValue(string &valueToSet, string &fieldToset, string &fieldToWher
                         ((Cell<char> *) rowElements[a])->setValue(valueToSet.at(0));
                         break;
                     }
-                    case MASK_DATE:
+                    case MASK_DATE:{
+                        if (getTypeFromValue(valueToSet) != MASK_DATE) {
+                            throw invalid_argument("ERROR: Set Value doesn't respect Type");
+                        }
+                        ((Cell<Date> *) rowElements[a])->setValue(valueToSet);
+                        break;
+
+                    }
                     default:
                         break;
                 }
@@ -748,17 +792,13 @@ void Table::setValue(string &valueToSet, string &fieldToset, string &fieldToWher
 
 }
 
-void Table::orderBy() {
-
-}
-
 bool Table::checkAutoIncrementParams(vector<int> paramsMask) {
 
     bool autoIncrementNotRespect = false;
     for (int j = 0; j < paramsMask.size(); j++) {
         if (paramsMask[j] & MASK_AUTOINCREMENT) {
             if ((paramsMask[j] & MASK_DATE) ^ (paramsMask[j] & MASK_TIME) ^ (paramsMask[j] & MASK_CHAR) ^
-                    (paramsMask[j] & MASK_TEXT) ^ (paramsMask[j] & MASK_FLOAT)) {
+                (paramsMask[j] & MASK_TEXT) ^ (paramsMask[j] & MASK_FLOAT)) {
                 autoIncrementNotRespect = true;
             }
         }
@@ -769,48 +809,48 @@ bool Table::checkAutoIncrementParams(vector<int> paramsMask) {
 bool Table::checkDuplicate(int i, int mask, string value) {
     bool retvalue = false;
 
-    for (int a = 0; a < rows.size(); a++){
+    for (int a = 0; a < rows.size(); a++) {
         vector<RowElement *> rowTmps = rows[a].getRow();
         switch (mask & 0b111) {
             case MASK_INT: {
                 int vali = ((Cell<int> *) rowTmps[i])->getValue();
-                if (vali == stoi(value)){
+                if (vali == stoi(value)) {
                     retvalue = true;
                 }
                 break;
             }
             case MASK_FLOAT: {
                 float valf = ((Cell<float> *) rowTmps[i])->getValue();
-                if (valf == stof(value)){
+                if (valf == stof(value)) {
                     retvalue = true;
                 }
                 break;
             }
             case MASK_TEXT: {
                 string vals = ((Cell<string> *) rowTmps[i])->getValue();
-                if (!vals.compare(value)){
+                if (!vals.compare(value)) {
                     retvalue = true;
                 }
                 break;
             }
-            case MASK_TIME:{
+            case MASK_TIME: {
                 Time time = ((Cell<Time> *) rowTmps[i])->getValue();
-                if (time == Time(value)){
+                if (time == Time(value)) {
                     retvalue = true;
                 }
                 break;
             }
             case MASK_CHAR: {
                 char valc = ((Cell<char> *) rowTmps[i])->getValue();
-                if (valc == value.at(0)){
+                if (valc == value.at(0)) {
                     retvalue = true;
                 }
                 break;
             }
 
-            case MASK_DATE:{
+            case MASK_DATE: {
                 Date date = ((Cell<Date> *) rowTmps[i])->getValue();
-                if(date == Date(value)){
+                if (date == Date(value)) {
                     retvalue = true;
                 }
                 break;
@@ -852,7 +892,7 @@ void Table::printAllOrdered(string mode, string col) {
                     cout << vals;
                     break;
                 }
-                case MASK_TIME:{
+                case MASK_TIME: {
                     Time time = ((Cell<Time> *) rowElements[a])->getValue();
                     cout << time;
                     break;
@@ -862,8 +902,7 @@ void Table::printAllOrdered(string mode, string col) {
                     cout << valc;
                     break;
                 }
-
-                case MASK_DATE:{
+                case MASK_DATE: {
                     Date date = ((Cell<Date> *) rowElements[a])->getValue();
                     cout << date;
                     break;
@@ -879,13 +918,13 @@ void Table::printAllOrdered(string mode, string col) {
 }
 
 vector<int> Table::getOrderIndexes(string mode, string col) {
-    //Only for int
+
     int cI = 0;
     int mask = 0;
     vector<int> ordIdx;
 
-    for (int c=0; c<cols.size(); c++){
-        if (!cols[c].getName().compare(col)){
+    for (int c = 0; c < cols.size(); c++) {
+        if (!cols[c].getName().compare(col)) {
             cI = c;
             mask = cols[c].getMask();
             break;
@@ -893,11 +932,11 @@ vector<int> Table::getOrderIndexes(string mode, string col) {
     }
 
     switch (mask & 0b111) {
-        case MASK_INT:{
+        case MASK_INT: {
             vector<int> valuesToOrder;
-            for (int i = 0; i < rows.size(); i++){
+            for (int i = 0; i < rows.size(); i++) {
                 vector<RowElement *> rowTmps = rows[i].getRow();
-                valuesToOrder.push_back( ((Cell<int> *) rowTmps[cI])->getValue() );
+                valuesToOrder.push_back(((Cell<int> *) rowTmps[cI])->getValue());
             }
 
             if (!mode.compare("asc"))
@@ -907,11 +946,11 @@ vector<int> Table::getOrderIndexes(string mode, string col) {
             break;
         }
 
-        case MASK_FLOAT:{
+        case MASK_FLOAT: {
             vector<float> valuesToOrder;
-            for (int i = 0; i < rows.size(); i++){
+            for (int i = 0; i < rows.size(); i++) {
                 vector<RowElement *> rowTmps = rows[i].getRow();
-                valuesToOrder.push_back( ((Cell<float> *) rowTmps[cI])->getValue() );
+                valuesToOrder.push_back(((Cell<float> *) rowTmps[cI])->getValue());
             }
 
             if (!mode.compare("asc"))
@@ -921,11 +960,11 @@ vector<int> Table::getOrderIndexes(string mode, string col) {
             break;
         }
 
-        case MASK_TEXT:{
+        case MASK_TEXT: {
             vector<string> valuesToOrder;
-            for (int i = 0; i < rows.size(); i++){
+            for (int i = 0; i < rows.size(); i++) {
                 vector<RowElement *> rowTmps = rows[i].getRow();
-                valuesToOrder.push_back( ((Cell<string> *) rowTmps[cI])->getValue() );
+                valuesToOrder.push_back(((Cell<string> *) rowTmps[cI])->getValue());
             }
 
             if (!mode.compare("asc"))
@@ -934,11 +973,11 @@ vector<int> Table::getOrderIndexes(string mode, string col) {
                 ordIdx = BubbleSortDesc(valuesToOrder);
             break;
         }
-        case MASK_CHAR:{
+        case MASK_CHAR: {
             vector<char> valuesToOrder;
-            for (int i = 0; i < rows.size(); i++){
+            for (int i = 0; i < rows.size(); i++) {
                 vector<RowElement *> rowTmps = rows[i].getRow();
-                valuesToOrder.push_back( ((Cell<char> *) rowTmps[cI])->getValue() );
+                valuesToOrder.push_back(((Cell<char> *) rowTmps[cI])->getValue());
             }
 
             if (!mode.compare("asc"))
@@ -948,11 +987,11 @@ vector<int> Table::getOrderIndexes(string mode, string col) {
             break;
         }
 
-        case MASK_TIME:{
+        case MASK_TIME: {
             vector<Time> valuesToOrder;
-            for (int i = 0; i < rows.size(); i++){
+            for (int i = 0; i < rows.size(); i++) {
                 vector<RowElement *> rowTmps = rows[i].getRow();
-                valuesToOrder.push_back( ((Cell<Time> *) rowTmps[cI])->getValue() );
+                valuesToOrder.push_back(((Cell<Time> *) rowTmps[cI])->getValue());
             }
 
             if (!mode.compare("asc"))
@@ -962,11 +1001,11 @@ vector<int> Table::getOrderIndexes(string mode, string col) {
             break;
         }
 
-        case MASK_DATE:{
+        case MASK_DATE: {
             vector<Date> valuesToOrder;
-            for (int i = 0; i < rows.size(); i++){
+            for (int i = 0; i < rows.size(); i++) {
                 vector<RowElement *> rowTmps = rows[i].getRow();
-                valuesToOrder.push_back( ((Cell<Date> *) rowTmps[cI])->getValue() );
+                valuesToOrder.push_back(((Cell<Date> *) rowTmps[cI])->getValue());
             }
 
             if (!mode.compare("asc"))
@@ -981,7 +1020,7 @@ vector<int> Table::getOrderIndexes(string mode, string col) {
 
 vector<int> Table::BubbleSortAsc(vector<Time> elements) {
     vector<int> indexes;
-    for (int i = 0; i < elements.size(); i++){
+    for (int i = 0; i < elements.size(); i++) {
         indexes.push_back(i);
     }
 
@@ -998,7 +1037,7 @@ vector<int> Table::BubbleSortAsc(vector<Time> elements) {
 
 vector<int> Table::BubbleSortDesc(vector<Time> elements) {
     vector<int> indexes;
-    for (int i = 0; i < elements.size(); i++){
+    for (int i = 0; i < elements.size(); i++) {
         indexes.push_back(i);
     }
     for (int j = elements.size() - 1; j > 0; j--) {
@@ -1014,7 +1053,7 @@ vector<int> Table::BubbleSortDesc(vector<Time> elements) {
 
 vector<int> Table::BubbleSortAsc(vector<Date> elements) {
     vector<int> indexes;
-    for (int i = 0; i < elements.size(); i++){
+    for (int i = 0; i < elements.size(); i++) {
         indexes.push_back(i);
     }
 
@@ -1031,7 +1070,7 @@ vector<int> Table::BubbleSortAsc(vector<Date> elements) {
 
 vector<int> Table::BubbleSortDesc(vector<Date> elements) {
     vector<int> indexes;
-    for (int i = 0; i < elements.size(); i++){
+    for (int i = 0; i < elements.size(); i++) {
         indexes.push_back(i);
     }
     for (int j = elements.size() - 1; j > 0; j--) {
@@ -1047,7 +1086,7 @@ vector<int> Table::BubbleSortDesc(vector<Date> elements) {
 
 vector<int> Table::BubbleSortAsc(vector<string> elements) {
     vector<int> indexes;
-    for (int i = 0; i < elements.size(); i++){
+    for (int i = 0; i < elements.size(); i++) {
         indexes.push_back(i);
     }
 
@@ -1064,7 +1103,7 @@ vector<int> Table::BubbleSortAsc(vector<string> elements) {
 
 vector<int> Table::BubbleSortDesc(vector<string> elements) {
     vector<int> indexes;
-    for (int i = 0; i < elements.size(); i++){
+    for (int i = 0; i < elements.size(); i++) {
         indexes.push_back(i);
     }
     for (int j = elements.size() - 1; j > 0; j--) {
@@ -1080,7 +1119,7 @@ vector<int> Table::BubbleSortDesc(vector<string> elements) {
 
 vector<int> Table::BubbleSortDesc(vector<char> elements) {
     vector<int> indexes;
-    for (int i = 0; i < elements.size(); i++){
+    for (int i = 0; i < elements.size(); i++) {
         indexes.push_back(i);
     }
     for (int j = elements.size() - 1; j > 0; j--) {
@@ -1093,9 +1132,10 @@ vector<int> Table::BubbleSortDesc(vector<char> elements) {
     }
     return indexes;
 }
+
 vector<int> Table::BubbleSortAsc(vector<char> elements) {
     vector<int> indexes;
-    for (int i = 0; i < elements.size(); i++){
+    for (int i = 0; i < elements.size(); i++) {
         indexes.push_back(i);
     }
 
@@ -1111,10 +1151,9 @@ vector<int> Table::BubbleSortAsc(vector<char> elements) {
 }
 
 
-
 vector<int> Table::BubbleSortAsc(vector<float> elements) {
     vector<int> indexes;
-    for (int i = 0; i < elements.size(); i++){
+    for (int i = 0; i < elements.size(); i++) {
         indexes.push_back(i);
     }
 
@@ -1131,7 +1170,7 @@ vector<int> Table::BubbleSortAsc(vector<float> elements) {
 
 vector<int> Table::BubbleSortDesc(vector<float> elements) {
     vector<int> indexes;
-    for (int i = 0; i < elements.size(); i++){
+    for (int i = 0; i < elements.size(); i++) {
         indexes.push_back(i);
     }
     for (int j = elements.size() - 1; j > 0; j--) {
@@ -1147,7 +1186,7 @@ vector<int> Table::BubbleSortDesc(vector<float> elements) {
 
 vector<int> Table::BubbleSortAsc(vector<int> elements) {
     vector<int> indexes;
-    for (int i = 0; i < elements.size(); i++){
+    for (int i = 0; i < elements.size(); i++) {
         indexes.push_back(i);
     }
 
@@ -1164,7 +1203,7 @@ vector<int> Table::BubbleSortAsc(vector<int> elements) {
 
 vector<int> Table::BubbleSortDesc(vector<int> elements) {
     vector<int> indexes;
-    for (int i = 0; i < elements.size(); i++){
+    for (int i = 0; i < elements.size(); i++) {
         indexes.push_back(i);
     }
     for (int j = elements.size() - 1; j > 0; j--) {
@@ -1176,5 +1215,377 @@ vector<int> Table::BubbleSortDesc(vector<int> elements) {
         }
     }
     return indexes;
+}
+
+void Table::printSelectOrdered(string mode, string col, vector<string> toPrint) {
+
+    vector<int> indexes = getOrderIndexes(mode, col);
+
+    cout << "-------------------------------------" << endl;
+    for (int i = 0; i < toPrint.size(); i++) {
+        cout << toPrint[i] << "|";
+    }
+    cout << endl;
+    cout << "-------------------------------------" << endl;
+
+    for (int j = 0; j < indexes.size(); j++) {
+        vector<RowElement *> rowElements = rows[indexes[j]].getRow();
+        for (int a = 0; a < cols.size(); a++) {
+            for (int b = 0; b < toPrint.size(); b++) {
+                if (!cols[a].getName().compare(toPrint[b])) {
+                    switch (cols[a].getMask() & 0b111) {
+                        case MASK_INT: {
+                            int vali = ((Cell<int> *) rowElements[a])->getValue();
+                            cout << vali;
+                            break;
+                        }
+                        case MASK_FLOAT: {
+                            float valf = ((Cell<float> *) rowElements[a])->getValue();
+                            cout << valf;
+                            break;
+                        }
+                        case MASK_TEXT: {
+                            string vals = ((Cell<string> *) rowElements[a])->getValue();
+                            cout << vals;
+                            break;
+                        }
+                        case MASK_TIME: {
+                            Time time = ((Cell<Time> *) rowElements[a])->getValue();
+                            cout << time;
+                            break;
+                        }
+                        case MASK_CHAR: {
+                            char valc = ((Cell<char> *) rowElements[a])->getValue();
+                            cout << valc;
+                            break;
+                        }
+                        case MASK_DATE: {
+                            Date date = ((Cell<Date> *) rowElements[a])->getValue();
+                            cout << date;
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+                    cout << "|";
+                }
+            }
+        }
+        cout << endl;
+    }
+}
+
+void Table::printWhereOrdered(vector<string> &toPrintWhere, vector<string> split, string mode, string col) {
+
+    vector<int> indexes = getOrderIndexes(mode, col);
+
+    cout << "-------------------------------------" << endl;
+    for (int i = 0; i < toPrintWhere.size(); i++) {
+        cout << toPrintWhere[i] << "|";
+    }
+    cout << endl;
+    cout << "-------------------------------------" << endl;
+
+
+    for (int j = 0; j < indexes.size(); j++) {
+        vector<RowElement *> rowElements = rows[indexes[j]].getRow();
+        for (int h = 0; h < cols.size(); h++) {
+            vector<int> masksToPrint = getMasksToPrint(toPrintWhere);
+            if (!cols[h].getName().compare(split[0])) {
+                switch (cols[h].getMask() & 0b111) {
+                    case MASK_INT: {
+                        int vali = ((Cell<int> *) rowElements[h])->getValue();
+                        if (vali == stoi(split[1])) {
+                            for (int r = 0; r < toPrintWhere.size(); r++) {
+                                for (int t = 0; t < cols.size(); t++) {
+                                    if (!toPrintWhere[r].compare(cols[t].getName())) {
+                                        int pos = t;
+                                        switch (masksToPrint[r] & 0b111) {
+                                            case MASK_INT: {
+                                                int valin = ((Cell<int> *) rowElements[pos])->getValue();
+                                                cout << valin << "|";
+                                                break;
+                                            }
+                                            case MASK_FLOAT: {
+                                                float valf = ((Cell<float> *) rowElements[pos])->getValue();
+                                                cout << valf << "|";
+                                                break;
+                                            }
+                                            case MASK_CHAR: {
+                                                char valc = ((Cell<char> *) rowElements[pos])->getValue();
+                                                cout << valc << "|";
+                                                break;
+                                            }
+                                            case MASK_TEXT: {
+                                                string vals = ((Cell<string> *) rowElements[pos])->getValue();
+                                                cout << vals << "|";
+                                                break;
+                                            }
+                                            case MASK_DATE: {
+                                                Date date = ((Cell<Date> *) rowElements[pos])->getValue();
+                                                cout << date << "|";
+                                                break;
+                                            }
+                                            case MASK_TIME: {
+                                                Time time = ((Cell<Time> *) rowElements[pos])->getValue();
+                                                cout << time << "|";
+                                                break;
+                                            }
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                            cout << endl;
+                        }
+                        break;
+                    }
+                    case MASK_FLOAT: {
+                        float valf = ((Cell<float> *) rowElements[h])->getValue();
+                        if (valf == stof(split[1])) {
+                            for (int r = 0; r < toPrintWhere.size(); r++) {
+                                for (int t = 0; t < cols.size(); t++) {
+                                    if (!toPrintWhere[r].compare(cols[t].getName())) {
+                                        int pos = t;
+                                        switch (masksToPrint[r] & 0b111) {
+                                            case MASK_INT: {
+                                                int vali = ((Cell<int> *) rowElements[pos])->getValue();
+                                                cout << vali << "|";
+                                                break;
+                                            }
+                                            case MASK_FLOAT: {
+                                                float valfl = ((Cell<float> *) rowElements[pos])->getValue();
+                                                cout << valfl << "|";
+                                                break;
+                                            }
+                                            case MASK_CHAR: {
+                                                char valc = ((Cell<char> *) rowElements[pos])->getValue();
+                                                cout << valc << "|";
+                                                break;
+                                            }
+                                            case MASK_TEXT: {
+                                                string vals = ((Cell<string> *) rowElements[pos])->getValue();
+                                                cout << vals << "|";
+                                                break;
+                                            }
+                                            case MASK_DATE: {
+                                                Date date = ((Cell<Date> *) rowElements[pos])->getValue();
+                                                cout << date << "|";
+                                                break;
+                                            }
+                                            case MASK_TIME: {
+                                                Time time = ((Cell<Time> *) rowElements[pos])->getValue();
+                                                cout << time << "|";
+                                                break;
+                                            }
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                            cout << endl;
+                        }
+                        break;
+                    }
+                    case MASK_TEXT: {
+                        string vals = ((Cell<string> *) rowElements[h])->getValue();
+                        if (!removeSpace(vals).compare(split[1])) {
+                            for (int r = 0; r < toPrintWhere.size(); r++) {
+                                for (int t = 0; t < cols.size(); t++) {
+                                    if (!toPrintWhere[r].compare(cols[t].getName())) {
+                                        int pos = t;
+                                        switch (masksToPrint[r] & 0b111) {
+                                            case MASK_INT: {
+                                                int vali = ((Cell<int> *) rowElements[pos])->getValue();
+                                                cout << vali << "|";
+                                                break;
+                                            }
+                                            case MASK_FLOAT: {
+                                                float valf = ((Cell<float> *) rowElements[pos])->getValue();
+                                                cout << valf << "|";
+                                                break;
+                                            }
+                                            case MASK_CHAR: {
+                                                char valc = ((Cell<char> *) rowElements[pos])->getValue();
+                                                cout << valc << "|";
+                                                break;
+                                            }
+                                            case MASK_TEXT: {
+                                                string valst = ((Cell<string> *) rowElements[pos])->getValue();
+                                                cout << valst << "|";
+                                                break;
+                                            }
+                                            case MASK_DATE: {
+                                                Date date = ((Cell<Date> *) rowElements[pos])->getValue();
+                                                cout << date << "|";
+                                                break;
+                                            }
+                                            case MASK_TIME: {
+                                                Time time = ((Cell<Time> *) rowElements[pos])->getValue();
+                                                cout << time << "|";
+                                                break;
+                                            }
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                            cout << endl;
+                        }
+                        break;
+                    }
+                    case MASK_CHAR: {
+                        char valc = ((Cell<char> *) rowElements[h])->getValue();
+                        if ((char) split[1].at(0) == valc) {
+                            for (int r = 0; r < toPrintWhere.size(); r++) {
+                                for (int t = 0; t < cols.size(); t++) {
+                                    if (!toPrintWhere[r].compare(cols[t].getName())) {
+                                        int pos = t;
+                                        switch (masksToPrint[r] & 0b111) {
+                                            case MASK_INT: {
+                                                int vali = ((Cell<int> *) rowElements[pos])->getValue();
+                                                cout << vali << "|";
+                                                break;
+                                            }
+                                            case MASK_FLOAT: {
+                                                float valf = ((Cell<float> *) rowElements[pos])->getValue();
+                                                cout << valf << "|";
+                                                break;
+                                            }
+                                            case MASK_CHAR: {
+                                                char valch = ((Cell<char> *) rowElements[pos])->getValue();
+                                                cout << valch << "|";
+                                                break;
+                                            }
+                                            case MASK_TEXT: {
+                                                string vals = ((Cell<string> *) rowElements[pos])->getValue();
+                                                cout << vals << "|";
+                                                break;
+                                            }
+                                            case MASK_DATE: {
+                                                Date date = ((Cell<Date> *) rowElements[pos])->getValue();
+                                                cout << date << "|";
+                                                break;
+                                            }
+                                            case MASK_TIME: {
+                                                Time time = ((Cell<Time> *) rowElements[pos])->getValue();
+                                                cout << time << "|";
+                                                break;
+                                            }
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                            cout << endl;
+                        }
+                        break;
+                    }
+                    case MASK_DATE: {
+                        Date date = ((Cell<Date> *) rowElements[h])->getValue();
+                        if (date == split[1]) {
+                            for (int r = 0; r < toPrintWhere.size(); r++) {
+                                for (int t = 0; t < cols.size(); t++) {
+                                    if (!toPrintWhere[r].compare(cols[t].getName())) {
+                                        int pos = t;
+                                        switch (masksToPrint[r] & 0b111) {
+                                            case MASK_INT: {
+                                                int vali = ((Cell<int> *) rowElements[pos])->getValue();
+                                                cout << vali << "|";
+                                                break;
+                                            }
+                                            case MASK_FLOAT: {
+                                                float valf = ((Cell<float> *) rowElements[pos])->getValue();
+                                                cout << valf << "|";
+                                                break;
+                                            }
+                                            case MASK_CHAR: {
+                                                char valch = ((Cell<char> *) rowElements[pos])->getValue();
+                                                cout << valch << "|";
+                                                break;
+                                            }
+                                            case MASK_TEXT: {
+                                                string vals = ((Cell<string> *) rowElements[pos])->getValue();
+                                                cout << vals << "|";
+                                                break;
+                                            }
+                                            case MASK_DATE: {
+                                                Date datei = ((Cell<Date> *) rowElements[pos])->getValue();
+                                                cout << datei << "|";
+                                                break;
+                                            }
+                                            case MASK_TIME: {
+                                                Time time = ((Cell<Time> *) rowElements[pos])->getValue();
+                                                cout << time << "|";
+                                                break;
+                                            }
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                            cout << endl;
+                        }
+                        break;
+                    }
+                    case MASK_TIME: {
+                        Time time = ((Cell<Time> *) rowElements[h])->getValue();
+                        if (time == split[1]) {
+                            for (int r = 0; r < toPrintWhere.size(); r++) {
+                                for (int t = 0; t < cols.size(); t++) {
+                                    if (!toPrintWhere[r].compare(cols[t].getName())) {
+                                        int pos = t;
+                                        switch (masksToPrint[r] & 0b111) {
+                                            case MASK_INT: {
+                                                int vali = ((Cell<int> *) rowElements[pos])->getValue();
+                                                cout << vali << "|";
+                                                break;
+                                            }
+                                            case MASK_FLOAT: {
+                                                float valf = ((Cell<float> *) rowElements[pos])->getValue();
+                                                cout << valf << "|";
+                                                break;
+                                            }
+                                            case MASK_CHAR: {
+                                                char valch = ((Cell<char> *) rowElements[pos])->getValue();
+                                                cout << valch << "|";
+                                                break;
+                                            }
+                                            case MASK_TEXT: {
+                                                string vals = ((Cell<string> *) rowElements[pos])->getValue();
+                                                cout << vals << "|";
+                                                break;
+                                            }
+                                            case MASK_DATE: {
+                                                Date date = ((Cell<Date> *) rowElements[pos])->getValue();
+                                                cout << date << "|";
+                                                break;
+                                            }
+                                            case MASK_TIME: {
+                                                Time timei = ((Cell<Time> *) rowElements[pos])->getValue();
+                                                cout << timei << "|";
+                                                break;
+                                            }
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                            cout << endl;
+                        }
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
+        }
+    }
 }
 
