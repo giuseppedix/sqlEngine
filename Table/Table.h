@@ -6,6 +6,8 @@
 #include "Row.h"
 #include "Column.h"
 #include <regex>
+#include <algorithm>
+
 using namespace std;
 
 class Table {
@@ -18,7 +20,6 @@ public:
     vector<Row> rows;
     vector<Column> cols;
     //METHODS
-    int addRow (vector<string>fields, vector <string> values, vector <string> valuesTxt);
     string getName(){
         return tableName;
     }
@@ -50,23 +51,45 @@ public:
     }
 
     void printAll();
-
+    void printAllOrdered(string mode, string col);
+    void printSelect(vector<string> toPrint);
+    void printWhere(vector<string> &toPrintWhere, vector<string>split);
     void removeAllRows();
+    void deleteFrom(string &fieldToDelete, string &valueToDelete);
+    void orderBy();
+    bool isFieldPresent(string field);
+    void updateRecords(string &valueToSet, string &fieldToSet, string &valueToWhere, string &fieldToWhere);
+    void setValue(string &valueToSet, string &fieldToset, string &fieldToWhere, int pos);
+    bool checkAutoIncrementParams(vector<int> paramsMask);
+    int addRow (vector<string>fields, vector <string> values);
 
 private:
     //METHODS
-    bool isFieldPresent(string field);
     int getnumberNotNull();
+    vector<int> BubbleSortAsc(vector<int> elements);
+    vector<int> BubbleSortDesc(vector<int> elements);
+    vector<int> BubbleSortAsc(vector<float> elements);
+    vector<int> BubbleSortDesc(vector<float> elements);
+    vector<int> BubbleSortAsc(vector<string> elements);
+    vector<int> BubbleSortDesc(vector<string> elements);
+    vector<int> BubbleSortAsc(vector<char> elements);
+    vector<int> BubbleSortDesc(vector<char> elements);
     vector<Column> getNotNullCols();
+    vector<Column> getAutoIncrementCols();
+    int getNumberAutoIncrement();
     bool checkNotNullinFields(vector<string>fields);
     vector<int> getMasks(vector<string> fields);
-    bool checkMasks(vector<int> masks, vector<string> values);
+    bool checkMasks(vector<int> masks, vector<string> values, vector<Column> cols);
     int getTypeFromValue(string value);
-
     void checkRow(vector<RowElement *> row);
     bool checkFieldsColsOrder (vector<string> fields, vector<Column> cols);
     void orderFieldsCols(vector<string> &fields, vector<string> &values, vector<Column> cols);
+    vector<int> getMasksToPrint (vector<string> &toPrint);
+    string removeSpace(string input);
 
+    bool checkDuplicate(int i, int mask, string value);
+
+    vector<int> getOrderIndexes(string mode, string col);
 };
 
 

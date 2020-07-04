@@ -15,8 +15,6 @@ public:
     bool isAutoIncrement;
     void addElements(vector<string> values);
 
-
-
 };
 
 template <class T>
@@ -30,6 +28,9 @@ public:
 
     T getValue(){
         return value;
+    }
+    void setValue(T value){
+        this->value = value;
     }
 };
 

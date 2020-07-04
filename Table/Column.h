@@ -11,7 +11,7 @@ class Column {
 
 public:
     //METHODS
-    Column(){};
+    Column() = default;
     int getMask() const;
     const string &getName() const;
     void setName(const string &name);

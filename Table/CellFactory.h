@@ -7,7 +7,6 @@
 #include "Column.h"
 #include "Table.h"
 
-
 using namespace std;
 
 class CellFactory {
@@ -21,6 +20,7 @@ public:
     vector<string> addElements(vector<string> values);
 
 private:
+    //ATTRIBUTES
     RowElement *cell;
 };
 
