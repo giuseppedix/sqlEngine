@@ -1,4 +1,5 @@
 #include "Date.h"
+#include "../SqlEngine/SqlEngine.h"
 
 Date::Date() {
     time_t t = time(0);   // get time now
@@ -104,4 +105,25 @@ bool Date::operator>(const Date &to_compare) {
         }
     }
     return ret;
+}
+
+Date::Date(string data_str) {
+
+    vector<string> timeSplitted = SqlEngine::splitValueByDelimiter(data_str, "/");
+    dd = stoi(timeSplitted[0]);
+    mm = stoi(timeSplitted[1]);
+    yy = stoi(timeSplitted[2]);
+
+    try{
+        if(dd > 31 || dd < 0){
+            throw invalid_argument("ERROR: Invalid day");
+        }
+        if(mm > 12 || mm < 0){
+            throw invalid_argument("ERROR: Invalid month");
+        }
+
+
+    } catch (invalid_argument &exc) {
+        cerr << exc.what() << endl;
+    }
 }

@@ -1,5 +1,7 @@
 #include "State.h"
 #include "SqlEngine.h"
+#include "../DateTime/Time.h"
+#include "../DateTime/Date.h"
 
 using namespace std;
 
@@ -110,13 +112,21 @@ void State::saveStateOnFile(string filepath) {
                             sfile << vals;
                             break;
                         }
-                        case MASK_TIME:
+                        case MASK_TIME:{
+                            Time time = ((Cell<Time> *) rowElements[a])->getValue();
+                            sfile << time;
+                            break;
+                        }
                         case MASK_CHAR: {
                             char valc = ((Cell<char> *) rowElements[a])->getValue();
                             sfile << valc;
                             break;
                         }
-                        case MASK_DATE:
+                        case MASK_DATE:{
+                            Date date = ((Cell<Date> *) rowElements[a])->getValue();
+                            sfile << date;
+                            break;
+                        }
                         default:
                             break;
                     }

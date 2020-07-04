@@ -1,4 +1,5 @@
 #include "Time.h"
+#include "../SqlEngine/SqlEngine.h"
 
 
 Time::Time(int h, int m, int s){
@@ -39,7 +40,18 @@ bool Time::operator==(const Time &to_compare) {
             (mm == to_compare.mm) &&
             (hh == to_compare.hh));
 }
+string Time::str() const {
+    ostringstream stream;
 
+    stream 	<< setfill('0') << setw(2) << hh << ":"
+              << setfill('0') << setw(2) << mm << ":"
+              << setfill('0') << setw(2) << ss;
+    return stream.str();
+}
+ostream& operator<< (std::ostream& stream, const Time& t) {
+    stream << t.str();
+    return  stream;
+}
 bool Time::operator!=(const Time &to_compare) {
     return !(*this == to_compare);
 }
@@ -78,4 +90,27 @@ bool Time::operator<(const Time &to_compare) {
         }
     }
     return ret;
+}
+
+Time::Time(string time_str) {
+    vector<string> timeSplitted = SqlEngine::splitValueByDelimiter(time_str, ":");
+    hh = stoi(timeSplitted[0]);
+    mm = stoi(timeSplitted[1]);
+    ss = stoi(timeSplitted[2]);
+
+    try{
+        if(hh > 23 || hh < 0){
+            throw out_of_range("ERROR: Invalid hh");
+        }
+        if(mm > 59 || mm < 0){
+            throw out_of_range("ERROR: Invalid mm");
+        }
+        if(ss > 59 || ss < 0){
+            throw out_of_range("ERROR: Invalid ss");
+        }
+
+    } catch (out_of_range &exc) {
+        cerr << exc.what() << endl;
+    }
+
 }

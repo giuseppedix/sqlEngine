@@ -16,6 +16,7 @@ public:
 // Constructor, pass the date in the form of dd,mm,yyyy
 // Note that the program crashes if the date is not valid...
     Date(int d, int m, int y);
+    Date(string date);
 // Copy Constructor
     Date(const Date & to_copy);
 // Getters

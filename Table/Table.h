@@ -7,6 +7,8 @@
 #include "Column.h"
 #include <regex>
 #include <algorithm>
+#include "../DateTime/Time.h"
+#include "../DateTime/Date.h"
 
 using namespace std;
 
@@ -66,6 +68,10 @@ public:
 private:
     //METHODS
     int getnumberNotNull();
+    vector<int> BubbleSortAsc(vector<Date> elements);
+    vector<int> BubbleSortDesc(vector<Date> elements);
+    vector<int> BubbleSortAsc(vector<Time> elements);
+    vector<int> BubbleSortDesc(vector<Time> elements);
     vector<int> BubbleSortAsc(vector<int> elements);
     vector<int> BubbleSortDesc(vector<int> elements);
     vector<int> BubbleSortAsc(vector<float> elements);

@@ -76,11 +76,12 @@ int SqlEngine::execute(const string &command) {
             default:
                 throw invalid_argument("ERROR: command not valid");
         }
-        return ret;
+
     }
     catch (invalid_argument &exec) {
         cerr << exec.what() << endl;
     }
+    return ret;
 }
 
 Command SqlEngine::getCommand(string command) {

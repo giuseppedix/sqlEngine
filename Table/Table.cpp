@@ -1,6 +1,7 @@
 #include "Table.h"
 #include "../SqlEngine/SqlEngine.h"
 #include "CellFactory.h"
+
 #include <algorithm>
 
 
@@ -303,14 +304,23 @@ void Table::printAll() {
                     cout << vals;
                     break;
                 }
-                case MASK_TIME:
+                case MASK_TIME:{
+                    Time time = ((Cell<Time> *) rowElements[a])->getValue();
+                    cout << time;
+                    break;
+                }
                 case MASK_CHAR: {
                     char valc = ((Cell<char> *) rowElements[a])->getValue();
                     cout << valc;
                     break;
                 }
 
-                case MASK_DATE:
+                case MASK_DATE:{
+                    Date date = ((Cell<Date> *) rowElements[a])->getValue();
+                    cout << date;
+                    break;
+
+                }
                 default:
                     break;
             }
@@ -747,8 +757,8 @@ bool Table::checkAutoIncrementParams(vector<int> paramsMask) {
     bool autoIncrementNotRespect = false;
     for (int j = 0; j < paramsMask.size(); j++) {
         if (paramsMask[j] & MASK_AUTOINCREMENT) {
-            if (paramsMask[j] & MASK_DATE ^ paramsMask[j] & MASK_TIME ^ paramsMask[j] & MASK_CHAR ^
-                paramsMask[j] & MASK_TEXT ^ paramsMask[j] & MASK_FLOAT) {
+            if ((paramsMask[j] & MASK_DATE) ^ (paramsMask[j] & MASK_TIME) ^ (paramsMask[j] & MASK_CHAR) ^
+                    (paramsMask[j] & MASK_TEXT) ^ (paramsMask[j] & MASK_FLOAT)) {
                 autoIncrementNotRespect = true;
             }
         }
@@ -783,7 +793,13 @@ bool Table::checkDuplicate(int i, int mask, string value) {
                 }
                 break;
             }
-            case MASK_TIME:
+            case MASK_TIME:{
+                Time time = ((Cell<Time> *) rowTmps[i])->getValue();
+                if (time == Time(value)){
+                    retvalue = true;
+                }
+                break;
+            }
             case MASK_CHAR: {
                 char valc = ((Cell<char> *) rowTmps[i])->getValue();
                 if (valc == value.at(0)){
@@ -792,7 +808,13 @@ bool Table::checkDuplicate(int i, int mask, string value) {
                 break;
             }
 
-            case MASK_DATE:
+            case MASK_DATE:{
+                Date date = ((Cell<Date> *) rowTmps[i])->getValue();
+                if(date == Date(value)){
+                    retvalue = true;
+                }
+                break;
+            }
             default:
                 break;
         }
@@ -830,14 +852,22 @@ void Table::printAllOrdered(string mode, string col) {
                     cout << vals;
                     break;
                 }
-                case MASK_TIME:
+                case MASK_TIME:{
+                    Time time = ((Cell<Time> *) rowElements[a])->getValue();
+                    cout << time;
+                    break;
+                }
                 case MASK_CHAR: {
                     char valc = ((Cell<char> *) rowElements[a])->getValue();
                     cout << valc;
                     break;
                 }
 
-                case MASK_DATE:
+                case MASK_DATE:{
+                    Date date = ((Cell<Date> *) rowElements[a])->getValue();
+                    cout << date;
+                    break;
+                }
                 default:
                     break;
             }
@@ -917,9 +947,104 @@ vector<int> Table::getOrderIndexes(string mode, string col) {
                 ordIdx = BubbleSortDesc(valuesToOrder);
             break;
         }
+
+        case MASK_TIME:{
+            vector<Time> valuesToOrder;
+            for (int i = 0; i < rows.size(); i++){
+                vector<RowElement *> rowTmps = rows[i].getRow();
+                valuesToOrder.push_back( ((Cell<Time> *) rowTmps[cI])->getValue() );
+            }
+
+            if (!mode.compare("asc"))
+                ordIdx = BubbleSortAsc(valuesToOrder);
+            else if (!mode.compare("desc"))
+                ordIdx = BubbleSortDesc(valuesToOrder);
+            break;
+        }
+
+        case MASK_DATE:{
+            vector<Date> valuesToOrder;
+            for (int i = 0; i < rows.size(); i++){
+                vector<RowElement *> rowTmps = rows[i].getRow();
+                valuesToOrder.push_back( ((Cell<Date> *) rowTmps[cI])->getValue() );
+            }
+
+            if (!mode.compare("asc"))
+                ordIdx = BubbleSortAsc(valuesToOrder);
+            else if (!mode.compare("desc"))
+                ordIdx = BubbleSortDesc(valuesToOrder);
+            break;
+        }
     }
     return ordIdx;
 }
+
+vector<int> Table::BubbleSortAsc(vector<Time> elements) {
+    vector<int> indexes;
+    for (int i = 0; i < elements.size(); i++){
+        indexes.push_back(i);
+    }
+
+    for (int j = elements.size() - 1; j > 0; j--) {
+        for (int i = 0; i < j; i++) {
+            if (elements[i] > elements[i + 1]) {
+                swap(elements[i], elements[i + 1]);
+                swap(indexes[i], indexes[i + 1]);
+            }
+        }
+    }
+    return indexes;
+}
+
+vector<int> Table::BubbleSortDesc(vector<Time> elements) {
+    vector<int> indexes;
+    for (int i = 0; i < elements.size(); i++){
+        indexes.push_back(i);
+    }
+    for (int j = elements.size() - 1; j > 0; j--) {
+        for (int i = 0; i < j; i++) {
+            if (elements[i] < elements[i + 1]) {
+                swap(elements[i], elements[i + 1]);
+                swap(indexes[i], indexes[i + 1]);
+            }
+        }
+    }
+    return indexes;
+}
+
+vector<int> Table::BubbleSortAsc(vector<Date> elements) {
+    vector<int> indexes;
+    for (int i = 0; i < elements.size(); i++){
+        indexes.push_back(i);
+    }
+
+    for (int j = elements.size() - 1; j > 0; j--) {
+        for (int i = 0; i < j; i++) {
+            if (elements[i] > elements[i + 1]) {
+                swap(elements[i], elements[i + 1]);
+                swap(indexes[i], indexes[i + 1]);
+            }
+        }
+    }
+    return indexes;
+}
+
+vector<int> Table::BubbleSortDesc(vector<Date> elements) {
+    vector<int> indexes;
+    for (int i = 0; i < elements.size(); i++){
+        indexes.push_back(i);
+    }
+    for (int j = elements.size() - 1; j > 0; j--) {
+        for (int i = 0; i < j; i++) {
+            if (elements[i] < elements[i + 1]) {
+                swap(elements[i], elements[i + 1]);
+                swap(indexes[i], indexes[i + 1]);
+            }
+        }
+    }
+    return indexes;
+}
+
 vector<int> Table::BubbleSortAsc(vector<string> elements) {
     vector<int> indexes;
     for (int i = 0; i < elements.size(); i++){

@@ -30,14 +30,6 @@ iomanip
 ctime
 -
 
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.cpp
-SqlEngine.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
-../Table/CellFactory.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.h
-string
--
-
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
 iostream
 -
@@ -56,12 +48,6 @@ bitset
 string
 -
 
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.cpp
-State.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
-SqlEngine.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
-
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/State.h
 ../Table/Table.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/Table.h
@@ -71,14 +57,6 @@ fstream
 -
 string
 -
-
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.cpp
-CellFactory.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.h
-RowElement.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/RowElement.h
-../SqlEngine/SqlEngine.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
 
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/Table/CellFactory.h
 vector
@@ -139,16 +117,10 @@ regex
 -
 algorithm
 -
-
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/main.cpp
-iostream
--
-SqlEngine/SqlEngine.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/SqlEngine/SqlEngine.h
-DateTime/Date.h
-/Users/rossellacentonze/Desktop/Prog/sqlEngine/DateTime/Date.h
-DateTime/Time.h
+../DateTime/Time.h
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/DateTime/Time.h
+../DateTime/Date.h
+/Users/rossellacentonze/Desktop/Prog/sqlEngine/DateTime/Date.h
 
 /Users/rossellacentonze/Desktop/Prog/sqlEngine/types.h
 

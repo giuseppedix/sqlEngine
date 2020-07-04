@@ -9,11 +9,6 @@ using namespace std;
 class RowElement{
 
 public:
-    string columnName;
-    Type type;
-    bool isNotNull;
-    bool isAutoIncrement;
-    void addElements(vector<string> values);
 
 };
 
